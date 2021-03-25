@@ -1,0 +1,59 @@
+import { app, BrowserWindow, dialog, ipcMain, ipcRenderer } from 'electron';
+import { getAssetURL } from 'electron-snowpack';
+
+let mainWindow: BrowserWindow | null | undefined;
+
+function createMainWindow(): BrowserWindow {
+	const window = new BrowserWindow({
+		height: 600,
+		width: 1200,
+		webPreferences: {
+			nodeIntegration: true,
+			contextIsolation: false,
+			enableRemoteModule: true
+		}
+	});
+
+	if (process.env.MODE !== 'production') {
+		window.webContents.openDevTools();
+	}
+
+	window.loadURL(getAssetURL('index.html'));
+
+	window.on('closed', (): void => {
+		mainWindow = null;
+	});
+
+	window.webContents.on('devtools-opened', (): void => {
+		window.focus();
+		setImmediate((): void => {
+			window.focus();
+		});
+	});
+
+	return window;
+}
+
+// quit application when all windows are closed
+app.on('window-all-closed', (): void => {
+	// on macOS it is common for applications to stay open until the user explicitly quits
+	if (process.platform !== 'darwin') {
+		app.quit();
+	}
+});
+
+app.on('activate', (): void => {
+	// on macOS it is common to re-create a window even after all windows have been closed
+	if (mainWindow === null) {
+		mainWindow = createMainWindow();
+	}
+});
+
+// create main BrowserWindow when electron is ready
+app.on('ready', (): void => {
+	mainWindow = createMainWindow();
+});
+
+ipcMain.on('display-error', () => {
+	dialog.showErrorBox('Big error', 'This is bad bro');
+})

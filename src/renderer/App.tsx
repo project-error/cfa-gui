@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { ipcRenderer } from 'electron';
+
+
 
 interface AppProps {}
 
@@ -12,6 +15,11 @@ function App({}: AppProps) {
     const timer = setTimeout(() => setCount(count + 1), 1000);
     return () => clearTimeout(timer);
   }, [count, setCount]);
+
+  const handleError = () => {
+    ipcRenderer.send('display-error');
+  }
+
   // Return the App component.
   return (
     <div className="App">
@@ -33,6 +41,7 @@ function App({}: AppProps) {
             Learn React
           </a>
         </p>
+        <button onClick={handleError}>Click for error</button>
       </header>
     </div>
   );

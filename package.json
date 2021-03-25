@@ -1,12 +1,15 @@
 {
   "scripts": {
-    "start": "snowpack dev",
-    "build": "snowpack build",
-    "test": "web-test-runner \"src/**/*.test.tsx\"",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-    "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
+    "build": "electron-snowpack build",
+    "clean": "electron-snowpack clean",
+    "dev": "electron-snowpack dev",
+    "dist": "electron-builder",
+    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
+    "open": "open dist/mac/${npm_package_name}.app",
+    "try": "run-s clean build dist:dir open"
   },
   "dependencies": {
+    "electron-snowpack": "^0.9.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   },
@@ -23,8 +26,13 @@
     "@types/snowpack-env": "^2.3.2",
     "@web/test-runner": "^0.12.0",
     "chai": "^4.2.0",
+    "electron": "^12.0.2",
+    "electron-builder": "^22.10.5",
     "prettier": "^2.0.5",
     "snowpack": "^3.0.1",
     "typescript": "^4.0.0"
+  },
+  "build": {
+    "extends": "electron-snowpack/config/electron-builder.js"
   }
 }
