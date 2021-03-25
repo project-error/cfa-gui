@@ -6,19 +6,18 @@ const { ipcRenderer } = window.require('electron');
 interface AppProps {}
 
 function App({}: AppProps) {
+    const handleError = () => {
+        ipcRenderer.send('display-error');
+    };
 
-  const handleError = () => {
-    ipcRenderer.send('display-error');
-  }
-
-  // Return the App component.
-  return (
-    <div className="App">
-      <header className="App-header">
-        <button onClick={handleError}>Click for error</button>
-      </header>
-    </div>
-  );
+    // Return the App component.
+    return (
+        <div className="App">
+            <header className="App-header">
+                <button onClick={handleError}>Click for error</button>
+            </header>
+        </div>
+    );
 }
 
 export default App;
