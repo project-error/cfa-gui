@@ -1,39 +1,42 @@
 {
-  "scripts": {
-    "build": "electron-snowpack build",
-    "clean": "electron-snowpack clean",
-    "dev": "electron-snowpack dev",
-    "dist": "electron-builder",
-    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
-    "open": "open dist/mac/${npm_package_name}.app",
-    "try": "run-s clean build dist:dir open"
-  },
-  "dependencies": {
-    "@electron/remote": "^1.0.4",
-    "electron-snowpack": "^0.9.0",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0"
-  },
-  "devDependencies": {
-    "@snowpack/plugin-dotenv": "^2.0.5",
-    "@snowpack/plugin-react-refresh": "^2.4.0",
-    "@snowpack/plugin-typescript": "^1.2.0",
-    "@snowpack/web-test-runner-plugin": "^0.2.0",
-    "@testing-library/react": "^11.0.0",
-    "@types/chai": "^4.2.13",
-    "@types/mocha": "^8.2.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "@types/snowpack-env": "^2.3.2",
-    "@web/test-runner": "^0.12.0",
-    "chai": "^4.2.0",
-    "electron": "^12.0.2",
-    "electron-builder": "^22.10.5",
-    "prettier": "^2.0.5",
-    "snowpack": "^3.0.1",
-    "typescript": "^4.0.0"
-  },
-  "build": {
-    "extends": "electron-snowpack/config/electron-builder.js"
-  }
+    "scripts": {
+        "build": "electron-snowpack build",
+        "clean": "electron-snowpack clean",
+        "dev": "electron-snowpack dev",
+        "dist": "electron-builder",
+        "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
+        "open": "open dist/mac/${npm_package_name}.app",
+        "try": "run-s clean build dist:dir open",
+        "prepare": "husky install"
+    },
+    "dependencies": {
+        "@electron/remote": "^1.0.4",
+        "electron-snowpack": "^0.9.0",
+        "react": "^17.0.0",
+        "react-dom": "^17.0.0"
+    },
+    "devDependencies": {
+        "@snowpack/plugin-dotenv": "^2.0.5",
+        "@snowpack/plugin-react-refresh": "^2.4.0",
+        "@snowpack/plugin-typescript": "^1.2.0",
+        "@snowpack/web-test-runner-plugin": "^0.2.0",
+        "@testing-library/react": "^11.0.0",
+        "@types/chai": "^4.2.13",
+        "@types/mocha": "^8.2.0",
+        "@types/react": "^17.0.0",
+        "@types/react-dom": "^17.0.0",
+        "@types/snowpack-env": "^2.3.2",
+        "@web/test-runner": "^0.12.0",
+        "chai": "^4.2.0",
+        "electron": "^12.0.2",
+        "electron-builder": "^22.10.5",
+        "husky": "^5.2.0",
+        "prettier": "^2.0.5",
+        "pretty-quick": "^3.1.0",
+        "snowpack": "^3.0.1",
+        "typescript": "^4.0.0"
+    },
+    "build": {
+        "extends": "electron-snowpack/config/electron-builder.js"
+    }
 }
