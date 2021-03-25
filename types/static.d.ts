@@ -57,3 +57,9 @@ declare module '*.png' {
 }
 
 /* CUSTOM: ADD YOUR OWN HERE */
+declare global {
+  interface Window {
+    require(moduleSpecifier: 'electron')
+    require(moduleSpecifier: '@electron/remote')
+  }
+}
