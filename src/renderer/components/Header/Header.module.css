@@ -32,6 +32,7 @@
     background-color: #f40552;
     border-radius: 50%;
     margin-right: 10px;
+    -webkit-app-region: no-drag;
 }
 
 .minimizeButton {
@@ -41,6 +42,7 @@
     background-color: #f4c805;
     border-radius: 50%;
     margin-right: 10px;
+    -webkit-app-region: no-drag;
 }
 
 .maximizeButton {
@@ -49,4 +51,5 @@
     height: 23px;
     background-color: #05f461;
     border-radius: 50%;
+    -webkit-app-region: no-drag;
 }

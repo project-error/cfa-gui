@@ -1,3 +1,4 @@
+import { BrowserWindow } from 'electron';
 import React from 'react';
 import styles from './Header.module.css';
 
@@ -7,6 +8,16 @@ export const Header = () => {
     const closeWindow = () => {
         BrowserWindow.getFocusedWindow().close();
     };
+    const minimizeWindow = () => {
+        BrowserWindow.getFocusedWindow().minimize();
+    };
+
+    const maximizeWindow = () => {
+        let win: BrowserWindow = BrowserWindow.getFocusedWindow();
+        win.isMaximized() && win.isMaximizable()
+            ? win.restore()
+            : win.maximize();
+    };
 
     return (
         <div className={styles.header}>
@@ -15,8 +26,14 @@ export const Header = () => {
             </div>
             <div className={styles.headerOptions}>
                 <div className={styles.closeButton} onClick={closeWindow} />
-                <div className={styles.minimizeButton} />
-                <div className={styles.maximizeButton} />
+                <div
+                    className={styles.minimizeButton}
+                    onClick={minimizeWindow}
+                />
+                <div
+                    className={styles.maximizeButton}
+                    onClick={maximizeWindow}
+                />
             </div>
         </div>
     );
