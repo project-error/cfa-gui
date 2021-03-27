@@ -11,9 +11,11 @@
     },
     "dependencies": {
         "@electron/remote": "^1.0.4",
+        "boxicons": "^2.0.7",
         "electron-snowpack": "^0.9.0",
         "react": "^17.0.0",
-        "react-dom": "^17.0.0"
+        "react-dom": "^17.0.0",
+        "react-icons": "^4.2.0"
     },
     "devDependencies": {
         "@snowpack/plugin-dotenv": "^2.0.5",

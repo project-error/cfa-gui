@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Header } from './components/Header/Header';
+import { ProjectWizard } from './components/Wizard/ProjectWizard';
 const { ipcRenderer } = window.require('electron');
 
 interface AppProps {}
@@ -13,9 +13,8 @@ function App({}: AppProps) {
     // Return the App component.
     return (
         <div className="App">
-            <header className="App-header">
-                <button onClick={handleError}>Click for error</button>
-            </header>
+            <Header />
+            <ProjectWizard />
         </div>
     );
 }

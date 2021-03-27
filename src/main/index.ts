@@ -1,12 +1,14 @@
 import { app, BrowserWindow, dialog, ipcMain, ipcRenderer } from 'electron';
 import { getAssetURL } from 'electron-snowpack';
+require('@electron/remote/main').initialize();
 
 let mainWindow: BrowserWindow | null | undefined;
 
 function createMainWindow(): BrowserWindow {
     const window = new BrowserWindow({
-        height: 600,
-        width: 1200,
+        height: 800,
+        width: 1400,
+        frame: true,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,

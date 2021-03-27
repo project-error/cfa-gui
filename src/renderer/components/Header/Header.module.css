@@ -1,0 +1,52 @@
+.header {
+    display: flex;
+    justify-items: center;
+    justify-content: space-between;
+    background-image: url('https://beta.iodine.gg/6c5fd.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    background-color: #161923;
+    padding: 10px;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+
+    -webkit-app-region: drag;
+}
+
+.headerTitle {
+    color: #fff;
+}
+
+.headerOptions {
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+
+.closeButton {
+    position: relative;
+    width: 23px;
+    height: 23px;
+    background-color: #f40552;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.minimizeButton {
+    position: relative;
+    width: 23px;
+    height: 23px;
+    background-color: #f4c805;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.maximizeButton {
+    position: relative;
+    width: 23px;
+    height: 23px;
+    background-color: #05f461;
+    border-radius: 50%;
+}
