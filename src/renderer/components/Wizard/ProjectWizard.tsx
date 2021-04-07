@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Wizard.module.css';
+import styles from './Wizard.module.scss';
 import { Button } from '../../ui';
 
 export const ProjectWizard = () => {
