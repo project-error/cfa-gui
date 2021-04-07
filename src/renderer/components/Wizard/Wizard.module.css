@@ -9,6 +9,7 @@
     width: 1000px;
     height: 600px;
     background-color: #202535;
+    padding: 10px;
 }
 
 .wizardHeader {
@@ -16,7 +17,11 @@
 
 .wizardHeaderTitle {
     color: #fff;
-    padding: 10px;
     text-decoration: underline;
     font-weight: 400;
+}
+
+.projectOptions {
+    margin-top: 20px;
+    display: flex;
 }
