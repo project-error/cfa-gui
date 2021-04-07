@@ -1,11 +1,15 @@
 import React from 'react';
 import styles from './Wizard.module.scss';
 import { Button } from '../../ui';
+import { WizardOptions } from './Options/WizardOptions';
+import { useProject } from './hooks/useProject';
 
 export const ProjectWizard = () => {
     const handleTypescript = () => {
         console.log('hello');
     };
+
+    const { project, setProject } = useProject();
 
     return (
         <div className={styles.projectWrapper}>
@@ -18,13 +22,29 @@ export const ProjectWizard = () => {
 
                 <div className={styles.projectOptions}>
                     <Button
-                        onClick={handleTypescript}
-                        style={{ marginRight: 10 }}
+                        onClick={() => setProject('TypeScript')}
+                        style={
+                            project === 'TypeScript'
+                                ? { background: '#f40552', marginRight: 10 }
+                                : { marginRight: 10 }
+                        }
                     >
                         TypeScript
                     </Button>
-                    <Button onClick={handleTypescript}>JavaScript</Button>
+
+                    <Button
+                        onClick={() => setProject('JavaScript')}
+                        style={
+                            project === 'JavaScript'
+                                ? { background: '#f40552' }
+                                : undefined
+                        }
+                    >
+                        JavaScript
+                    </Button>
                 </div>
+
+                <WizardOptions type={project} />
             </div>
         </div>
     );

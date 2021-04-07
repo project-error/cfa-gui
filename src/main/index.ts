@@ -1,4 +1,4 @@
-import { app, BrowserWindow, dialog, ipcMain, ipcRenderer } from 'electron';
+import { app, BrowserWindow, dialog, ipcMain } from 'electron';
 import { getAssetURL } from 'electron-snowpack';
 require('@electron/remote/main').initialize();
 
