@@ -1,15 +1,20 @@
+import { BrowserWindow } from 'electron';
 import React from 'react';
 import styles from './Header.module.css';
-
-const { BrowserWindow } = window.require('@electron/remote');
 
 export const Header = () => {
     const closeWindow = () => {
         BrowserWindow.getFocusedWindow().close();
     };
-
     const minimizeWindow = () => {
         BrowserWindow.getFocusedWindow().minimize();
+    };
+
+    const maximizeWindow = () => {
+        let win: BrowserWindow = BrowserWindow.getFocusedWindow();
+        win.isMaximized() && win.isMaximizable()
+            ? win.restore()
+            : win.maximize();
     };
 
     return (
@@ -23,7 +28,10 @@ export const Header = () => {
                     className={styles.minimizeButton}
                     onClick={minimizeWindow}
                 />
-                <div className={styles.maximizeButton} />
+                <div
+                    className={styles.maximizeButton}
+                    onClick={maximizeWindow}
+                />
             </div>
         </div>
     );
