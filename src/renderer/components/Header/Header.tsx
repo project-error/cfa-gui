@@ -8,6 +8,10 @@ export const Header = () => {
         BrowserWindow.getFocusedWindow().close();
     };
 
+    const minimizeWindow = () => {
+        BrowserWindow.getFocusedWindow().minimize();
+    };
+
     return (
         <div className={styles.header}>
             <div>
@@ -15,7 +19,10 @@ export const Header = () => {
             </div>
             <div className={styles.headerOptions}>
                 <div className={styles.closeButton} onClick={closeWindow} />
-                <div className={styles.minimizeButton} />
+                <div
+                    className={styles.minimizeButton}
+                    onClick={minimizeWindow}
+                />
                 <div className={styles.maximizeButton} />
             </div>
         </div>
