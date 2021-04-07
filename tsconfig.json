@@ -11,6 +11,7 @@
         /* Additional Options */
         "strict": true,
         "skipLibCheck": true,
+        "strictNullChecks": false,
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
         "allowSyntheticDefaultImports": true
