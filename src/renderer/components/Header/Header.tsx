@@ -1,6 +1,7 @@
-import { BrowserWindow } from 'electron';
 import React from 'react';
 import styles from './Header.module.css';
+
+const { BrowserWindow } = window.require('@electron/remote');
 
 export const Header = () => {
     const closeWindow = () => {
@@ -11,7 +12,7 @@ export const Header = () => {
     };
 
     const maximizeWindow = () => {
-        let win: BrowserWindow = BrowserWindow.getFocusedWindow();
+        let win = BrowserWindow.getFocusedWindow();
         win.isMaximized() && win.isMaximizable()
             ? win.restore()
             : win.maximize();
