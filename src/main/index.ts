@@ -9,6 +9,7 @@ function createMainWindow(): BrowserWindow {
         height: 800,
         width: 1400,
         frame: true,
+        resizable: false,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
