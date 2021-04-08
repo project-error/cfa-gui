@@ -1,6 +1,7 @@
 import { app, BrowserWindow, dialog, ipcMain } from 'electron';
 import { getAssetURL } from 'electron-snowpack';
 require('@electron/remote/main').initialize();
+import './functions/createTypescript';
 
 let mainWindow: BrowserWindow | null | undefined;
 
@@ -55,8 +56,4 @@ app.on('activate', (): void => {
 // create main BrowserWindow when electron is ready
 app.on('ready', (): void => {
     mainWindow = createMainWindow();
-});
-
-ipcMain.on('display-error', () => {
-    dialog.showErrorBox('Big error', 'This is bad bro');
 });
