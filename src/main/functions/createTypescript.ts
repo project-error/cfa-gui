@@ -1,12 +1,15 @@
 import { dialog, ipcMain, Notification } from 'electron';
 import { cloneTemplate } from '../tools/handleGit';
 
-ipcMain.on('createBoilerplate', (event, args) => {
+ipcMain.on('createBoilerplate', async (event, args) => {
     console.log(args);
 
-    cloneTemplate(args.path[0], args.type);
-
-    showNotification();
+    try {
+        await cloneTemplate(args.path[0], args.type);
+        showNotification();
+    } catch (err) {
+        console.log(err);
+    }
 });
 
 const showNotification = () => {
