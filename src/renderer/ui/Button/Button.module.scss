@@ -1,0 +1,29 @@
+.button {
+    color: #fff;
+    background-color: #161923;
+    padding: 5px 20px;
+    border: 2px solid #f40552;
+    outline: none;
+
+    font-size: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    cursor: pointer;
+    margin: 0.5rem 0;
+
+    &:hover {
+        background-color: #f40552;
+    }
+
+    &:disabled {
+        color: #656565;
+        border: 2px solid #434343;
+
+        &:hover {
+            background-color: #161923;
+        }
+    }
+}
