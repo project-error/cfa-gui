@@ -1,15 +1,20 @@
 import React, { CSSProperties } from 'react';
-import styles from './Button.module.css';
+import styles from './Button.module.scss';
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children: React.ReactNode;
     onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     style?: CSSProperties;
 }
 
-export const Button = ({ children, onClick, style }: ButtonProps) => {
+export const Button = ({ children, onClick, style, ...rest }: ButtonProps) => {
     return (
-        <button onClick={onClick} className={styles.button} style={style}>
+        <button
+            onClick={onClick}
+            className={styles.button}
+            style={style}
+            {...rest}
+        >
             {children}
         </button>
     );
