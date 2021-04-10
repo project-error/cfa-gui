@@ -16,7 +16,7 @@ export default function Pagination() {
     };
 
     return (
-        <div style={{ width: '20%', position: 'absolute', bottom: '13%' }}>
+        <div style={{ width: '20%', position: 'absolute', bottom: '11%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
                 <Button onClick={handleBack} disabled={steps == 1}>
                     Back
