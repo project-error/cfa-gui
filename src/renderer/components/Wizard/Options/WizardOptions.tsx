@@ -49,7 +49,7 @@ export const WizardOptions = ({ type }: Options) => {
                 {path}
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {/* <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <BorderedInput
                     width="30%"
                     type="text"
@@ -84,21 +84,28 @@ export const WizardOptions = ({ type }: Options) => {
 
                 <PaginationButton size={30} active={false} />
                 <PaginationButton size={30} active={true} />
-            </div>
+            </div> */}
 
-            {/* <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <BorderedInput
                     width="30%"
                     type="text"
                     placeholder="Enter resource name"
                     value={resourceName}
-                    onChange={(e) => setResourceName(e.target.value)} />
+                    onChange={(e) => setResourceName(e.target.value)}
+                />
 
-                <div>{error && <p className={styles.errorText}>{error}</p>}</div>
+                <div>
+                    {error && <p className={styles.errorText}>{error}</p>}
+                </div>
 
-                <Button onClick={handlePath} style={{ width: "200px" }}>Select Path</Button>
-                <Button onClick={handleIpc} style={{ width: "200px" }}>Create Resource</Button>
-            </div> */}
+                <Button onClick={handlePath} style={{ width: '200px' }}>
+                    Select Path
+                </Button>
+                <Button onClick={handleIpc} style={{ width: '200px' }}>
+                    Create Resource
+                </Button>
+            </div>
         </div>
     );
 };
