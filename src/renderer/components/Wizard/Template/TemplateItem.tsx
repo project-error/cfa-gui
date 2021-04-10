@@ -3,9 +3,10 @@ import styles from './WizardTemplates.module.scss';
 
 interface TemplateItemProps {
     thumbnail: string;
+    title: string;
 }
 
-export const TemplateItem = ({ thumbnail }: TemplateItemProps) => {
+export const TemplateItem = ({ thumbnail, title }: TemplateItemProps) => {
     return (
         <div className={styles.template}>
             <img
@@ -15,7 +16,7 @@ export const TemplateItem = ({ thumbnail }: TemplateItemProps) => {
             />
             <div className={styles.info}>
                 <h1>
-                    For all the champs out there
+                    {title}
                     <img
                         className={styles.miniIcon}
                         src={thumbnail}

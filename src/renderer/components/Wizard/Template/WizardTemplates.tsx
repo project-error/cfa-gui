@@ -12,9 +12,14 @@ export const WizardTemplates = () => {
             </div>
 
             <div className={styles.templateList}>
-                <TemplateItem thumbnail="https://i.imgur.com/CsKulHz.png" />
-                <TemplateItem thumbnail="https://i.imgur.com/DVqhRFH.jpg" />
-                <TemplateItem thumbnail="https://i.imgur.com/CsKulHz.png" />
+                <TemplateItem
+                    thumbnail="https://i.imgur.com/CsKulHz.png"
+                    title="Typescript Resource"
+                />
+                <TemplateItem
+                    thumbnail="https://i.imgur.com/DVqhRFH.jpg"
+                    title="Javascript Resource"
+                />
             </div>
         </div>
     );
