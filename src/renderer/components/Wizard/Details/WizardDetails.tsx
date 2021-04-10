@@ -63,14 +63,14 @@ export const WizardDetails = () => {
                 style={{
                     display: 'flex',
                     justifyContent: 'space-between',
-                    width: '85%',
+                    width: '86.5%',
                     marginTop: 20,
                 }}
             >
                 <div className={styles.underlineInputWrapper}>
                     <label className={styles.optionLabel}>Project Name</label>
                     <BorderedInput
-                        width="90%"
+                        width="95%"
                         type="text"
                         placeholder="My Cool Project"
                         value={resourceName}
@@ -81,7 +81,7 @@ export const WizardDetails = () => {
                 <div className={styles.underlineInputWrapper}>
                     <label className={styles.optionLabel}>Author</label>
                     <BorderedInput
-                        width="90%"
+                        width="95%"
                         type="text"
                         placeholder="Your Name..."
                         value={author}
@@ -92,7 +92,7 @@ export const WizardDetails = () => {
                 <div className={styles.underlineInputWrapper}>
                     <label className={styles.optionLabel}>Version</label>
                     <BorderedInput
-                        width="90%"
+                        width="95%"
                         type="text"
                         placeholder="1.0.0"
                         value={version}
