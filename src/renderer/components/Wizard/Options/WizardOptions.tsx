@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '../../../ui';
 import { BorderedInput } from '../../../ui/BorderedInput/BorderedInput';
 import { PaginationButton } from '../../../ui/PaginationButton/Checkbox';
@@ -28,6 +28,8 @@ export const WizardOptions = ({ type }: Options) => {
             properties: ['openDirectory'],
         });
         setPath(selectedPath);
+
+        localStorage.setItem('previousPath', selectedPath); // Store the new path in local storage
     };
 
     // This will not be used here
@@ -43,6 +45,12 @@ export const WizardOptions = ({ type }: Options) => {
         ipcRenderer.send('createBoilerplate', { path, type, resourceName });
         setError(null);
     };
+
+    // Used to check if we have a stored path in our local storage
+    useEffect(() => {
+        const prevPath = localStorage.getItem('previousPath');
+        if (prevPath) setPath([prevPath]);
+    }, []);
 
     return (
         <div>
