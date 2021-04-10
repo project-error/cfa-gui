@@ -47,7 +47,7 @@ export const WizardDetails = () => {
     }, []);
 
     return (
-        <div style={{ marginTop: 20, width: '100%' }}>
+        <div style={{ marginTop: 20, width: '100%', flex: 'auto' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <BorderedInput
                     placeholder="Project Path..."
