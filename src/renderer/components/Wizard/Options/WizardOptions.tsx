@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '../../../ui';
+import { BorderedInput } from '../../../ui/BorderedInput/BorderedInput';
+import { UnderlineInput } from '../../../ui/UnderlineInput/UnderlineInput';
 import styles from '../Wizard.module.scss';
 
 const { dialog } = window.require('@electron/remote');
@@ -39,35 +41,60 @@ export const WizardOptions = ({ type }: Options) => {
 
     return (
         <div>
-            {type === 'TypeScript' ? (
-                <h1>TypeScript Creation</h1>
-            ) : (
-                <h1>JavaScript Creation</h1>
-            )}
+            <h1>{type} Creation</h1>
 
             <div>
                 <h3>Selected path</h3>
                 {path}
             </div>
 
-            <div>
-                <input
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <BorderedInput
+                    width="30%"
                     type="text"
                     placeholder="Enter resource name"
                     value={resourceName}
                     onChange={(e) => setResourceName(e.target.value)}
                 />
+
+                <UnderlineInput
+                    width="30%"
+                    type="text"
+                    placeholder="Enter resource name"
+                    value={resourceName}
+                    onChange={(e) => setResourceName(e.target.value)}
+                />
+
+                <UnderlineInput
+                    width="30%"
+                    type="text"
+                    borderColor="#C5C5BD"
+                    placeholder="Enter resource name"
+                    value={resourceName}
+                    onChange={(e) => setResourceName(e.target.value)}
+                />
+
+                <Button onClick={() => {}} style={{ width: '200px' }} disabled>
+                    Disabled Button
+                </Button>
+                <Button onClick={() => {}} style={{ width: '200px' }}>
+                    Normal Button
+                </Button>
             </div>
 
-            <div>{error && <p className={styles.errorText}>{error}</p>}</div>
+            {/* <div style={{ display: "flex", flexDirection: "column" }}>
+                <BorderedInput
+                    width="30%"
+                    type="text"
+                    placeholder="Enter resource name"
+                    value={resourceName}
+                    onChange={(e) => setResourceName(e.target.value)} />
 
-            <div>
-                <Button onClick={handlePath}>Select Path</Button>
-            </div>
+                <div>{error && <p className={styles.errorText}>{error}</p>}</div>
 
-            <div>
-                <Button onClick={handleIpc}>Create</Button>
-            </div>
+                <Button onClick={handlePath} style={{ width: "200px" }}>Select Path</Button>
+                <Button onClick={handleIpc} style={{ width: "200px" }}>Create Resource</Button>
+            </div> */}
         </div>
     );
 };
