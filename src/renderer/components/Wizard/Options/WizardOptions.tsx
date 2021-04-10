@@ -16,6 +16,9 @@ export const WizardOptions = ({ type }: Options) => {
     const [path, setPath] = useState(null);
     const [error, setError] = useState<null | string>(null);
     const [resourceName, setResourceName] = useState('');
+    const [author, setAuthor] = useState('');
+    const [version, setVersion] = useState('');
+    const [description, setDescription] = useState('');
 
     const handlePath = () => {
         console.log('path');
@@ -27,6 +30,7 @@ export const WizardOptions = ({ type }: Options) => {
         setPath(selectedPath);
     };
 
+    // This will not be used here
     const handleIpc = () => {
         if (path === null) {
             return setError('Please enter a path');
@@ -42,69 +46,74 @@ export const WizardOptions = ({ type }: Options) => {
 
     return (
         <div>
-            <h1>{type} Creation</h1>
-
-            <div>
-                <h3>Selected path</h3>
-                {path}
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <BorderedInput
+                    placeholder="Project Path..."
+                    width="85%"
+                    type="text"
+                    value={path}
+                />
+                <Button onClick={handlePath}>Browse</Button>
             </div>
 
-            {/* <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <BorderedInput
-                    width="30%"
-                    type="text"
-                    placeholder="Enter resource name"
-                    value={resourceName}
-                    onChange={(e) => setResourceName(e.target.value)}
-                />
+            {/* This should def be a reusable component, but rn I am lazy */}
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    width: '85%',
+                    marginTop: 20,
+                }}
+            >
+                <div className={styles.underlineInputWrapper}>
+                    <label className={styles.optionLabel}>Project Name</label>
+                    <UnderlineInput
+                        width="90%"
+                        type="text"
+                        placeholder="My Cool Project"
+                        value={resourceName}
+                        onChange={(e) => setResourceName(e.currentTarget.value)}
+                    />
+                </div>
 
-                <UnderlineInput
-                    width="30%"
-                    type="text"
-                    placeholder="Enter resource name"
-                    value={resourceName}
-                    onChange={(e) => setResourceName(e.target.value)}
-                />
+                <div className={styles.underlineInputWrapper}>
+                    <label className={styles.optionLabel}>Author</label>
+                    <UnderlineInput
+                        width="90%"
+                        type="text"
+                        placeholder="Your Name..."
+                        value={author}
+                        onChange={(e) => setAuthor(e.currentTarget.value)}
+                    />
+                </div>
 
-                <UnderlineInput
-                    width="30%"
-                    type="text"
-                    borderColor="#C5C5BD"
-                    placeholder="Enter resource name"
-                    value={resourceName}
-                    onChange={(e) => setResourceName(e.target.value)}
-                />
-
-                <Button onClick={() => {}} style={{ width: '200px' }} disabled>
-                    Disabled Button
-                </Button>
-                <Button onClick={() => {}} style={{ width: '200px' }}>
-                    Normal Button
-                </Button>
-
-                <PaginationButton size={30} active={false} />
-                <PaginationButton size={30} active={true} />
-            </div> */}
-
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <BorderedInput
-                    width="30%"
-                    type="text"
-                    placeholder="Enter resource name"
-                    value={resourceName}
-                    onChange={(e) => setResourceName(e.target.value)}
-                />
+                <div className={styles.underlineInputWrapper}>
+                    <label className={styles.optionLabel}>Version</label>
+                    <UnderlineInput
+                        width="90%"
+                        type="text"
+                        placeholder="1.0.0"
+                        value={version}
+                        onChange={(e) => setVersion(e.currentTarget.value)}
+                    />
+                </div>
 
                 <div>
                     {error && <p className={styles.errorText}>{error}</p>}
                 </div>
+            </div>
 
-                <Button onClick={handlePath} style={{ width: '200px' }}>
-                    Select Path
-                </Button>
-                <Button onClick={handleIpc} style={{ width: '200px' }}>
-                    Create Resource
-                </Button>
+            <div style={{ marginTop: 20 }}>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <label className={styles.optionLabel}>Description</label>
+                    <BorderedInput
+                        placeholder="A new RP server"
+                        width="85%"
+                        type="text"
+                        value={description}
+                        onChange={(e) => setDescription(e.currentTarget.value)}
+                    />
+                </div>
             </div>
         </div>
     );

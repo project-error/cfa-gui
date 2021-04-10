@@ -12,9 +12,6 @@
     padding: 10px;
 }
 
-.wizardHeader {
-}
-
 .wizardHeaderTitle {
     color: #fff;
     text-decoration: underline;
@@ -28,4 +25,16 @@
 
 .errorText {
     color: red;
+}
+
+/* Options styles */
+.optionLabel {
+    color: #fff;
+    font-size: 18px;
+}
+
+.underlineInputWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
 }
