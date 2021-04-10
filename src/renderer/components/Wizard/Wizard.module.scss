@@ -11,6 +11,13 @@
     padding: 2rem;
     border-radius: 10px;
     background-color: #131517;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wizardHeader {
+    width: 100%;
 }
 
 .wizardHeaderTitle {

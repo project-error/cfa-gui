@@ -1,5 +1,6 @@
 .container {
     margin-top: 20px;
+    width: 100%;
 
     .searchSection {
         display: flex;
@@ -20,7 +21,7 @@
         border-radius: 10px;
         background-color: rgba(14, 14, 16, 0.5);
         overflow-y: scroll;
-        height: 315px;
+        height: 262px;
     }
 
     .template {
