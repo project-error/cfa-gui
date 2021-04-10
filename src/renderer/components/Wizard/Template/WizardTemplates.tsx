@@ -20,6 +20,10 @@ export const WizardTemplates = () => {
                     thumbnail="https://i.imgur.com/DVqhRFH.jpg"
                     title="Javascript Resource"
                 />
+                <TemplateItem
+                    thumbnail="https://beta.iodine.gg/4ci04.png"
+                    title="Lua Resource"
+                />
             </div>
         </div>
     );
