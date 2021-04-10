@@ -8,7 +8,7 @@ export const WizardTemplates = () => {
         <div className={styles.container}>
             <div className={styles.searchSection}>
                 <label>Project Templates</label>
-                <BorderedInput placeholder="Search project templates" />
+                {/* <BorderedInput placeholder="Search project templates" /> */}
             </div>
 
             <div className={styles.templateList}>
