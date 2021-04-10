@@ -4,7 +4,7 @@ export const WizardContext = createContext<WizardProps>(undefined);
 
 export const WizardProvider = ({ children }: { children: React.ReactNode }) => {
     const [project, setProject] = useState<ProjectTypes>('TypeScript');
-    const [steps, setSteps] = useState(1);
+    const [steps, setSteps] = useState(2);
 
     const value = {
         project,
