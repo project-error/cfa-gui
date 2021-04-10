@@ -67,6 +67,7 @@ export const WizardDetails = () => {
                     marginTop: 20,
                 }}
             >
+                {/* This should def be a reusable component, but rn I am lazy */}
                 <div className={styles.underlineInputWrapper}>
                     <label className={styles.optionLabel}>Project Name</label>
                     <BorderedInput
