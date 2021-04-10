@@ -8,7 +8,7 @@ import styles from '../Wizard.module.scss';
 const { dialog } = window.require('@electron/remote');
 const { ipcRenderer } = window.require('electron');
 
-export const WizardOptions = () => {
+export const WizardDetails = () => {
     const [path, setPath] = useState<any>('');
     const [error, setError] = useState<null | string>(null);
     const [resourceName, setResourceName] = useState('');

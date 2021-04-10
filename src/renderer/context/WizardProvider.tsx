@@ -4,10 +4,13 @@ export const WizardContext = createContext<WizardProps>(undefined);
 
 export const WizardProvider = ({ children }: { children: React.ReactNode }) => {
     const [project, setProject] = useState<ProjectTypes>('TypeScript');
+    const [steps, setSteps] = useState(1);
 
     const value = {
         project,
         setProject,
+        steps,
+        setSteps,
     };
 
     return (
@@ -20,6 +23,8 @@ export const WizardProvider = ({ children }: { children: React.ReactNode }) => {
 interface WizardProps {
     project: ProjectTypes;
     setProject: (type: ProjectTypes) => void;
+    steps: number;
+    setSteps: (step: number) => void;
 }
 
 type ProjectTypes = 'TypeScript' | 'JavaScript';
