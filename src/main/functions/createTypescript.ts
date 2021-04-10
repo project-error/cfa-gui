@@ -1,11 +1,11 @@
 import { dialog, ipcMain, Notification } from 'electron';
-import { cloneTemplate } from '../tools/handleGit';
+import { createResource } from './createResource';
 
 ipcMain.on('createBoilerplate', async (event, args) => {
     console.log(args);
 
     try {
-        await cloneTemplate(args.path[0], args.type);
+        await createResource(args.path[0], args.type, args.resourceName);
         showNotification();
     } catch (err) {
         console.log(err);

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '../../../ui';
+import styles from '../Wizard.module.scss';
 
 const { dialog } = window.require('@electron/remote');
 const { ipcRenderer } = window.require('electron');
@@ -10,6 +11,8 @@ interface Options {
 
 export const WizardOptions = ({ type }: Options) => {
     const [path, setPath] = useState(null);
+    const [error, setError] = useState<null | string>(null);
+    const [resourceName, setResourceName] = useState('');
 
     const handlePath = () => {
         console.log('path');
@@ -22,7 +25,16 @@ export const WizardOptions = ({ type }: Options) => {
     };
 
     const handleIpc = () => {
-        ipcRenderer.send('createBoilerplate', { path, type });
+        if (path === null) {
+            return setError('Please enter a path');
+        }
+
+        if (resourceName === '') {
+            return setError('Please enter a valid resource  name');
+        }
+
+        ipcRenderer.send('createBoilerplate', { path, type, resourceName });
+        setError(null);
     };
 
     return (
@@ -37,6 +49,17 @@ export const WizardOptions = ({ type }: Options) => {
                 <h3>Selected path</h3>
                 {path}
             </div>
+
+            <div>
+                <input
+                    type="text"
+                    placeholder="Enter resource name"
+                    value={resourceName}
+                    onChange={(e) => setResourceName(e.target.value)}
+                />
+            </div>
+
+            <div>{error && <p className={styles.errorText}>{error}</p>}</div>
 
             <div>
                 <Button onClick={handlePath}>Select Path</Button>
