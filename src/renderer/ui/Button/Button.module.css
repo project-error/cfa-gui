@@ -23,3 +23,7 @@
     color: #656565;
     border: 2px solid #434343;
 }
+
+.button:disabled:hover {
+    background-color: #161923;
+}
