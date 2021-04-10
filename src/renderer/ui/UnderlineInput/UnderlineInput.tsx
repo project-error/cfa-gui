@@ -5,12 +5,10 @@ interface UnderlineInputProps
     extends React.InputHTMLAttributes<HTMLInputElement> {
     style?: CSSProperties;
     width?: string;
-    borderColor?: string;
 }
 
 export const UnderlineInput = ({
     width = '100%',
-    borderColor = '#f40552',
     style,
     ...rest
 }: UnderlineInputProps) => {
@@ -18,7 +16,7 @@ export const UnderlineInput = ({
         <input
             {...rest}
             className={styles.underlineInput}
-            style={{ width: width, borderColor: borderColor }}
+            style={{ width: width }}
         />
     );
 };
