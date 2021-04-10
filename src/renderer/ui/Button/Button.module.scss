@@ -1,11 +1,13 @@
 .button {
     color: #fff;
-    background-color: #161923;
-    padding: 5px 20px;
-    border: 2px solid #f40552;
+    background-color: #1e2023;
+    box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.3);
+    padding: 15px 30px;
+    border: none;
+    border-radius: 6px;
     outline: none;
 
-    font-size: 20px;
+    font-size: 16px;
 
     display: flex;
     align-items: center;
@@ -15,7 +17,7 @@
     margin: 0.5rem 0;
 
     &:hover {
-        background-color: #f40552;
+        background-color: rgba(30, 32, 35, 0.5);
     }
 
     &:disabled {

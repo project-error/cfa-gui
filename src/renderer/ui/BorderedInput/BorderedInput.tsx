@@ -16,7 +16,7 @@ export const BorderedInput = ({
         <input
             {...rest}
             className={styles.borderdInput}
-            style={{ width: width }}
+            style={{ width: width, padding: 10 }}
         />
     );
 };

@@ -8,12 +8,8 @@ import styles from '../Wizard.module.scss';
 const { dialog } = window.require('@electron/remote');
 const { ipcRenderer } = window.require('electron');
 
-interface Options {
-    type: 'TypeScript' | 'JavaScript';
-}
-
-export const WizardOptions = ({ type }: Options) => {
-    const [path, setPath] = useState(null);
+export const WizardOptions = () => {
+    const [path, setPath] = useState<any>('');
     const [error, setError] = useState<null | string>(null);
     const [resourceName, setResourceName] = useState('');
     const [author, setAuthor] = useState('');
@@ -41,8 +37,6 @@ export const WizardOptions = ({ type }: Options) => {
         if (resourceName === '') {
             return setError('Please enter a valid resource  name');
         }
-
-        ipcRenderer.send('createBoilerplate', { path, type, resourceName });
         setError(null);
     };
 
@@ -53,7 +47,7 @@ export const WizardOptions = ({ type }: Options) => {
     }, []);
 
     return (
-        <div>
+        <div style={{ marginTop: 20 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <BorderedInput
                     placeholder="Project Path..."
@@ -75,7 +69,7 @@ export const WizardOptions = ({ type }: Options) => {
             >
                 <div className={styles.underlineInputWrapper}>
                     <label className={styles.optionLabel}>Project Name</label>
-                    <UnderlineInput
+                    <BorderedInput
                         width="90%"
                         type="text"
                         placeholder="My Cool Project"
@@ -86,7 +80,7 @@ export const WizardOptions = ({ type }: Options) => {
 
                 <div className={styles.underlineInputWrapper}>
                     <label className={styles.optionLabel}>Author</label>
-                    <UnderlineInput
+                    <BorderedInput
                         width="90%"
                         type="text"
                         placeholder="Your Name..."
@@ -97,7 +91,7 @@ export const WizardOptions = ({ type }: Options) => {
 
                 <div className={styles.underlineInputWrapper}>
                     <label className={styles.optionLabel}>Version</label>
-                    <UnderlineInput
+                    <BorderedInput
                         width="90%"
                         type="text"
                         placeholder="1.0.0"
