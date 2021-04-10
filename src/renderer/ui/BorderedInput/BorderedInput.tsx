@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import styles from './BorderedInput.module.css';
+import styles from './BorderedInput.module.scss';
 
 interface BorderedInputProps
     extends React.InputHTMLAttributes<HTMLInputElement> {

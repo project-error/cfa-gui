@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import styles from './UnderlineInput.module.css';
+import styles from './UnderlineInput.module.scss';
 
 interface UnderlineInputProps
     extends React.InputHTMLAttributes<HTMLInputElement> {

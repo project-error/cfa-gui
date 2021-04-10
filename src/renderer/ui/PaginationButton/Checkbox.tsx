@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import styles from './PaginationButton.module.css';
+import styles from './PaginationButton.module.scss';
 
 interface PaginationButtonProps
     extends React.ButtonHTMLAttributes<HTMLButtonElement> {
