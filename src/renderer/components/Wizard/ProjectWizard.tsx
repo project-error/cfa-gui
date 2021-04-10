@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Wizard.module.scss';
 import { WizardOptions } from './Options/WizardOptions';
+import Pagination from './Pagination/Pagination';
 
 export const ProjectWizard = () => {
     return (
@@ -14,6 +15,7 @@ export const ProjectWizard = () => {
 
                 <WizardOptions />
             </div>
+            <Pagination />
         </div>
     );
 };
