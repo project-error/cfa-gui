@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { Button } from '../../../ui';
+import { useProject } from '../hooks/useProject';
 import { Package } from './Package';
 import styles from './WizardPackages.module.scss';
 
 export const WizardPackages = () => {
+    const { project, setProject } = useProject();
     const [selectedPackages, setSelectedPackages] = useState<string[]>([]);
 
     const handlePackage = (pack: string) => {
@@ -24,6 +27,7 @@ export const WizardPackages = () => {
             <div className={styles.titleSection}>
                 <label>Choose what packages you would like to include</label>
             </div>
+            <Button onClick={() => console.log(project)}>SS</Button>
 
             <div className={styles.packageList}>
                 <Package

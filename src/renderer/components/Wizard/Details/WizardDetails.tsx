@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '../../../ui';
 import { BorderedInput } from '../../../ui/BorderedInput/BorderedInput';
+import { useProject } from '../hooks/useProject';
 import styles from '../Wizard.module.scss';
 
 const { dialog } = window.require('@electron/remote');
@@ -13,6 +14,7 @@ export const WizardDetails = () => {
     const [author, setAuthor] = useState('');
     const [version, setVersion] = useState('');
     const [description, setDescription] = useState('');
+    const { project, setProject } = useProject();
 
     const handlePath = () => {
         console.log('path');
@@ -26,23 +28,32 @@ export const WizardDetails = () => {
         localStorage.setItem('previousPath', selectedPath); // Store the new path in local storage
     };
 
-    // This will not be used here
-    const handleIpc = () => {
-        if (path === null) {
-            return setError('Please enter a path');
-        }
-
-        if (resourceName === '') {
-            return setError('Please enter a valid resource  name');
-        }
-        setError(null);
-    };
-
     // Used to check if we have a stored path in our local storage
     useEffect(() => {
         const prevPath = localStorage.getItem('previousPath');
         if (prevPath) setPath([prevPath]);
+
+        if (project) {
+            setAuthor(project.author);
+            setResourceName(project.resource);
+            setVersion(project.version);
+            setDescription(project.description);
+            setPath(project.path);
+        }
     }, []);
+
+    useEffect(() => {
+        return () => {
+            setProject({
+                path: path,
+                resource: resourceName,
+                author: author,
+                version: version,
+                description: description,
+                templateType: project ? project.templateType : null,
+            });
+        };
+    }, [resourceName, author, version, description]);
 
     return (
         <div style={{ marginTop: 20, width: '100%', flex: 'auto' }}>

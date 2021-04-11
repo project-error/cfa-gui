@@ -33,6 +33,12 @@
         border-radius: 10px;
         background-color: #1f2022;
         margin-bottom: 1rem;
+        transition: ease-in 0.1s;
+
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0px 0px 3px 2px #f40552;
+        }
 
         .thumbnail {
             height: 90px;

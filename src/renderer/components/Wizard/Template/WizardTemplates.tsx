@@ -1,9 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Button } from '../../../ui';
 import { BorderedInput } from '../../../ui/BorderedInput/BorderedInput';
+import { useProject } from '../hooks/useProject';
 import { TemplateItem } from './TemplateItem';
 import styles from './WizardTemplates.module.scss';
 
+const templates = [
+    {
+        type: 'Typescript',
+        title: 'Typescript Resource',
+        thumbnail: 'https://i.imgur.com/CsKulHz.png',
+    },
+    {
+        type: 'Javascript',
+        title: 'Javascript Resource',
+        thumbnail: 'https://i.imgur.com/DVqhRFH.jpg',
+    },
+    {
+        type: 'Lua',
+        title: 'Lua Resource',
+        thumbnail: 'https://beta.iodine.gg/4ci04.png',
+    },
+];
+
 export const WizardTemplates = () => {
+    const [selectedTemplate, setSelectedTemplate] = useState<null | string>(
+        null,
+    );
+    const { project, setProject } = useProject();
+
+    const setTemplate = (temp: string) => {
+        setProject({
+            ...project,
+            templateType: temp,
+        });
+    };
+
     return (
         <div className={styles.container}>
             <div className={styles.searchSection}>
@@ -12,18 +44,16 @@ export const WizardTemplates = () => {
             </div>
 
             <div className={styles.templateList}>
-                <TemplateItem
-                    thumbnail="https://i.imgur.com/CsKulHz.png"
-                    title="Typescript Resource"
-                />
-                <TemplateItem
-                    thumbnail="https://i.imgur.com/DVqhRFH.jpg"
-                    title="Javascript Resource"
-                />
-                <TemplateItem
-                    thumbnail="https://beta.iodine.gg/4ci04.png"
-                    title="Lua Resource"
-                />
+                {templates &&
+                    templates.map((temp) => (
+                        <TemplateItem
+                            active={project.templateType === temp.type}
+                            thumbnail={temp.thumbnail}
+                            title={temp.title}
+                            type={temp.type}
+                            selectTemplate={(type) => setTemplate(type)}
+                        />
+                    ))}
             </div>
         </div>
     );
