@@ -4,6 +4,7 @@ import { WizardDetails } from './Details/WizardDetails';
 import Pagination from './Pagination/Pagination';
 import { usePagination } from './hooks/usePagination';
 import { WizardTemplates } from './Template/WizardTemplates';
+import { WizardPackages } from './Packages/WizardPackages';
 import { Steps } from '../Steps/Steps';
 
 export const ProjectWizard = () => {
@@ -19,6 +20,7 @@ export const ProjectWizard = () => {
 
                 {steps == 1 && <WizardDetails />}
                 {steps == 2 && <WizardTemplates />}
+                {steps == 3 && <WizardPackages />}
 
                 <Pagination />
                 <Steps step={steps} />

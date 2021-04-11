@@ -1,0 +1,15 @@
+.button {
+    box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.3);
+    border: none;
+    border-radius: 6px;
+    outline: none;
+    transition: ease-in 0.2s;
+
+    .checkMark {
+        height: 18px;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}

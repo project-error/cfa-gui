@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '../../../ui';
 import { BorderedInput } from '../../../ui/BorderedInput/BorderedInput';
-import { PaginationButton } from '../../../ui/PaginationButton/Checkbox';
-import { UnderlineInput } from '../../../ui/UnderlineInput/UnderlineInput';
 import styles from '../Wizard.module.scss';
 
 const { dialog } = window.require('@electron/remote');
