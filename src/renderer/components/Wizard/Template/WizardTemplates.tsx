@@ -4,22 +4,23 @@ import { BorderedInput } from '../../../ui/BorderedInput/BorderedInput';
 import { useProject } from '../hooks/useProject';
 import { TemplateItem } from './TemplateItem';
 import styles from './WizardTemplates.module.scss';
+import { SiTypescript, SiJavascript, SiLua } from 'react-icons/si';
 
 const templates = [
     {
         type: 'Typescript',
         title: 'Typescript Resource',
-        thumbnail: 'https://i.imgur.com/CsKulHz.png',
+        thumbnail: <SiTypescript color="white" size={88} />,
     },
     {
         type: 'Javascript',
         title: 'Javascript Resource',
-        thumbnail: 'https://i.imgur.com/DVqhRFH.jpg',
+        thumbnail: <SiJavascript color="white" size={88} />,
     },
     {
         type: 'Lua',
         title: 'Lua Resource',
-        thumbnail: 'https://beta.iodine.gg/4ci04.png',
+        thumbnail: <SiLua color="white" size={88} />,
     },
 ];
 
