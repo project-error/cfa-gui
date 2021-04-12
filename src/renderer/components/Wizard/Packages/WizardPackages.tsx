@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '../../../ui';
 import { useProject } from '../hooks/useProject';
 import { Package } from './Package';
@@ -6,7 +6,9 @@ import styles from './WizardPackages.module.scss';
 
 export const WizardPackages = () => {
     const { project, setProject } = useProject();
-    const [selectedPackages, setSelectedPackages] = useState<string[]>([]);
+    const [selectedPackages, setSelectedPackages] = useState<string[]>(
+        project.packages ? project.packages : [],
+    );
 
     const handlePackage = (pack: string) => {
         // Check if they already selected/added the package if so
@@ -22,6 +24,14 @@ export const WizardPackages = () => {
 
         setSelectedPackages(tempArr);
     };
+
+    useEffect(() => {
+        setProject({
+            ...project,
+            packages: selectedPackages,
+        });
+    }, [selectedPackages]);
+
     return (
         <div className={styles.container}>
             <div className={styles.titleSection}>

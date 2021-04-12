@@ -34,4 +34,5 @@ type ProjectObject = {
     version: string | null;
     description: string | null;
     templateType: string | null;
+    packages?: string[] | null;
 };

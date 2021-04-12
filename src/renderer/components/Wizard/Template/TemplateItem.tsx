@@ -4,6 +4,7 @@ import styles from './WizardTemplates.module.scss';
 interface TemplateItemProps {
     thumbnail: React.ReactNode;
     title: string;
+    description: string;
     type: string;
     active: boolean;
     selectTemplate: (e: string) => void;
@@ -12,6 +13,7 @@ interface TemplateItemProps {
 export const TemplateItem = ({
     thumbnail,
     title,
+    description,
     selectTemplate,
     type,
     active,
@@ -25,13 +27,7 @@ export const TemplateItem = ({
             <div className={styles.thumbnail}>{thumbnail}</div>
             <div className={styles.info}>
                 <h1>{title}</h1>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit ut
-                    aliquam, purus sit amet luctus venenatis, lectus magna
-                    fringilla urna, porttitor rhoncus dolor purus non enim
-                    praesent elementum facilisis leo, vel fringilla est
-                    ullamcorper eget{' '}
-                </p>
+                <p>{description}</p>
             </div>
         </div>
     );
