@@ -2,10 +2,16 @@ import React from 'react';
 import { useProject } from '../hooks/useProject';
 import { usePagination } from '../hooks/usePagination';
 import styles from './WizardCompletion.module.scss';
+const { ipcRenderer } = window.require('electron');
+import { Button } from '../../../ui';
 
 export default function WizardCompletion() {
     const { project, setProject } = useProject();
     const { steps, setSteps } = usePagination();
+
+    const handleCreateResource = () => {
+        ipcRenderer.send('createBoilerplate', project);
+    };
 
     return (
         <div className={styles.container}>
@@ -43,6 +49,8 @@ export default function WizardCompletion() {
                     </label>
                 </div>
             </div>
+
+            <Button onClick={handleCreateResource}>Create</Button>
         </div>
     );
 }

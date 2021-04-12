@@ -7,14 +7,14 @@
         "outDir": "./",
         "noImplicitAny": true,
         "module": "commonjs",
-        "target": "es6",
+        "target": "ES2018",
         "allowJs": true,
-        "lib": ["es2017"],
+        "lib": ["ES2018"],
         "types": ["@citizenfx/client", "@types/node"],
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "esModuleInterop": true
     },
     "include": ["./**/*"],
-    "exclude": ["**/node_modules", "**/__tests__/*"]
+    "exclude": ["**/node_modules"]
 }

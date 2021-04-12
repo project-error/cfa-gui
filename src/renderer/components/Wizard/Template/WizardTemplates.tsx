@@ -8,12 +8,12 @@ import { SiTypescript, SiJavascript, SiLua } from 'react-icons/si';
 
 const templates = [
     {
-        type: 'Typescript',
+        type: 'TypeScript',
         title: 'Typescript Resource',
         thumbnail: <SiTypescript color="white" size={88} />,
     },
     {
-        type: 'Javascript',
+        type: 'JavaScript',
         title: 'Javascript Resource',
         thumbnail: <SiJavascript color="white" size={88} />,
     },
