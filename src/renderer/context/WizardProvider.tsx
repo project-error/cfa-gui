@@ -3,7 +3,7 @@ import React, { useContext, createContext, useState } from 'react';
 export const WizardContext = createContext<WizardProps>(undefined);
 
 export const WizardProvider = ({ children }: { children: React.ReactNode }) => {
-    const [project, setProject] = useState<ProjectTypes>('TypeScript');
+    const [project, setProject] = useState<ProjectObject | null>(null);
     const [steps, setSteps] = useState(1);
 
     const value = {
@@ -21,10 +21,17 @@ export const WizardProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 interface WizardProps {
-    project: ProjectTypes;
-    setProject: (type: ProjectTypes) => void;
+    project: ProjectObject;
+    setProject: (project: ProjectObject) => void;
     steps: number;
     setSteps: (step: number) => void;
 }
 
-type ProjectTypes = 'TypeScript' | 'JavaScript';
+type ProjectObject = {
+    path: string | null;
+    resource: string | null;
+    author: string | null;
+    version: string | null;
+    description: string | null;
+    templateType: string | null;
+};
