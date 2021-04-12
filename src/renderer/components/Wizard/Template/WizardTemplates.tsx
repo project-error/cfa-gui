@@ -10,17 +10,20 @@ const templates = [
     {
         type: 'TypeScript',
         title: 'Typescript Resource',
-        thumbnail: <SiTypescript color="white" size={88} />,
+        description: 'A complete starter kit with tsconfig and webpack.',
+        thumbnail: <SiTypescript color="white" size={90} />,
     },
     {
         type: 'JavaScript',
         title: 'Javascript Resource',
-        thumbnail: <SiJavascript color="white" size={88} />,
+        description: 'A simple boilerplate with webpack.',
+        thumbnail: <SiJavascript color="white" size={90} />,
     },
     {
         type: 'Lua',
         title: 'Lua Resource',
-        thumbnail: <SiLua color="white" size={88} />,
+        description: 'Includes a client and server file.',
+        thumbnail: <SiLua color="white" size={90} />,
     },
 ];
 
@@ -51,6 +54,7 @@ export const WizardTemplates = () => {
                             active={project.templateType === temp.type}
                             thumbnail={temp.thumbnail}
                             title={temp.title}
+                            description={temp.description}
                             type={temp.type}
                             selectTemplate={(type) => setTemplate(type)}
                         />
