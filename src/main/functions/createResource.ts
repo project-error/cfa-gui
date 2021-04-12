@@ -1,7 +1,7 @@
 import * as cp from 'child_process';
 import rimraf from 'rimraf';
 import fs from 'fs-extra';
-import { createFxmaniest } from '../copiers/typescriptTemplate';
+import { createFxmaniest } from '../stubs/typescriptTemplate';
 
 export async function createResource(project: any) {
     // First lets copy the folder from our project_templates
