@@ -47,6 +47,12 @@ export default function WizardCompletion() {
                     <label>
                         Type: <span>{project.templateType}</span>
                     </label>
+                    <label>Pacakges:</label>
+                    {project.packages?.map((pg) => (
+                        <label>
+                            <span>{pg}</span>
+                        </label>
+                    ))}
                 </div>
             </div>
 
