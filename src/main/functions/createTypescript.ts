@@ -1,17 +1,14 @@
 import { ipcMain, Notification } from 'electron';
+import { ProjectObject } from '../types/project';
 import { createResource } from './createResource';
 
-ipcMain.on('createBoilerplate', async (event, project) => {
+ipcMain.on('createBoilerplate', async (event, project: ProjectObject) => {
     try {
         await createResource(project);
         showNotification();
     } catch (err) {
         console.log(err);
     }
-});
-
-ipcMain.on('testProject', (event, args) => {
-    console.log(args);
 });
 
 const showNotification = () => {

@@ -5,64 +5,52 @@ import { Package } from './Package';
 import styles from './WizardPackages.module.scss';
 
 export const WizardPackages = () => {
-    const { project, setProject } = useProject();
-    const [selectedPackages, setSelectedPackages] = useState<string[]>(
-        project.packages ? project.packages : [],
-    );
+    const { setResourcePackages, resourcePackages } = useProject();
 
-    const handlePackage = (pack: string) => {
-        // Check if they already selected/added the package if so
-        // Lets remove it since I would assume they dont want it anymore?
-        const tempArr = [...selectedPackages];
-        const packIndex = selectedPackages.findIndex((e) => e === pack);
+    const handlePackage = (selectedPackage: string) => {
+        const tempArr = [...resourcePackages];
+        const packIndex = tempArr.findIndex((e) => e === selectedPackage);
 
         if (packIndex >= 0) {
             tempArr.splice(packIndex, 1);
         } else {
-            tempArr.push(pack);
+            tempArr.push(selectedPackage);
         }
 
-        setSelectedPackages(tempArr);
+        setResourcePackages(tempArr);
     };
-
-    useEffect(() => {
-        setProject({
-            ...project,
-            packages: selectedPackages,
-        });
-    }, [selectedPackages]);
 
     return (
         <div className={styles.container}>
             <div className={styles.titleSection}>
                 <label>Choose what packages you would like to include</label>
             </div>
-            <Button onClick={() => console.log(project)}>SS</Button>
+            {/* <Button onClick={() => console.log(project)}>SS</Button> */}
 
             <div className={styles.packageList}>
                 <Package
                     packageName="fivem-js"
                     packageTitle="Fivem-js"
                     onClick={handlePackage}
-                    isSelected={selectedPackages.includes('fivem-js')}
+                    isSelected={resourcePackages.includes('fivem-js')}
                 />
                 <Package
                     packageName="typeorm"
                     packageTitle="TypeORM"
                     onClick={handlePackage}
-                    isSelected={selectedPackages.includes('typeorm')}
+                    isSelected={resourcePackages.includes('typeorm')}
                 />
                 <Package
                     packageName="mysql2"
                     packageTitle="mysql2"
                     onClick={handlePackage}
-                    isSelected={selectedPackages.includes('mysql2')}
+                    isSelected={resourcePackages.includes('mysql2')}
                 />
                 <Package
                     packageName="esx.js"
                     packageTitle="esx.js"
                     onClick={handlePackage}
-                    isSelected={selectedPackages.includes('esx.js')}
+                    isSelected={resourcePackages.includes('esx.js')}
                 />
             </div>
         </div>

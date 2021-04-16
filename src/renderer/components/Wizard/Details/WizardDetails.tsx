@@ -5,55 +5,38 @@ import { useProject } from '../hooks/useProject';
 import styles from '../Wizard.module.scss';
 
 const { dialog } = window.require('@electron/remote');
-const { ipcRenderer } = window.require('electron');
 
 export const WizardDetails = () => {
-    const [path, setPath] = useState<any>('');
-    const [error, setError] = useState<null | string>(null);
-    const [resourceName, setResourceName] = useState('');
-    const [author, setAuthor] = useState('');
-    const [version, setVersion] = useState('');
-    const [description, setDescription] = useState('');
-    const { project, setProject } = useProject();
+    const {
+        resourcePath,
+        resourceName,
+        resourceAuthor,
+        resourceVersion,
+        resourceDescription,
+        setResourcePath,
+        setResourceName,
+        setResourceAuthor,
+        setResourceVersion,
+        setResourceDescription,
+    } = useProject();
 
     const handlePath = () => {
-        console.log('path');
         const selectedPath = dialog.showOpenDialogSync({
             title: 'Choose path to install boilerplate',
             buttonLabel: 'Select',
             properties: ['openDirectory'],
         });
-        setPath(selectedPath);
-
-        localStorage.setItem('previousPath', selectedPath); // Store the new path in local storage
+        setResourcePath(selectedPath[0]);
+        localStorage.setItem('previousPath', selectedPath[0]); // Store the new path in local storage
     };
 
     // Used to check if we have a stored path in our local storage
     useEffect(() => {
         const prevPath = localStorage.getItem('previousPath');
-        if (prevPath) setPath([prevPath]);
-
-        if (project) {
-            setAuthor(project.author);
-            setResourceName(project.resource);
-            setVersion(project.version);
-            setDescription(project.description);
-            setPath(project.path);
+        if (prevPath) {
+            setResourcePath(prevPath);
         }
     }, []);
-
-    useEffect(() => {
-        return () => {
-            setProject({
-                path: path,
-                resource: resourceName,
-                author: author,
-                version: version,
-                description: description,
-                templateType: project ? project.templateType : null,
-            });
-        };
-    }, [resourceName, author, version, description]);
 
     return (
         <div style={{ marginTop: 20, width: '100%', flex: 'auto' }}>
@@ -62,7 +45,8 @@ export const WizardDetails = () => {
                     placeholder="Project Path..."
                     width="85%"
                     type="text"
-                    value={path}
+                    disabled
+                    value={resourcePath}
                 />
                 <Button onClick={handlePath}>Browse</Button>
             </div>
@@ -94,8 +78,10 @@ export const WizardDetails = () => {
                         width="95%"
                         type="text"
                         placeholder="Your Name..."
-                        value={author}
-                        onChange={(e) => setAuthor(e.currentTarget.value)}
+                        value={resourceAuthor}
+                        onChange={(e) =>
+                            setResourceAuthor(e.currentTarget.value)
+                        }
                     />
                 </div>
 
@@ -105,13 +91,11 @@ export const WizardDetails = () => {
                         width="95%"
                         type="text"
                         placeholder="1.0.0"
-                        value={version}
-                        onChange={(e) => setVersion(e.currentTarget.value)}
+                        value={resourceVersion}
+                        onChange={(e) =>
+                            setResourceVersion(e.currentTarget.value)
+                        }
                     />
-                </div>
-
-                <div>
-                    {error && <p className={styles.errorText}>{error}</p>}
                 </div>
             </div>
 
@@ -122,8 +106,10 @@ export const WizardDetails = () => {
                         placeholder="A new RP server"
                         width="85%"
                         type="text"
-                        value={description}
-                        onChange={(e) => setDescription(e.currentTarget.value)}
+                        value={resourceDescription}
+                        onChange={(e) =>
+                            setResourceDescription(e.currentTarget.value)
+                        }
                     />
                 </div>
             </div>
