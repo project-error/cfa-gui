@@ -1,7 +1,7 @@
 import { app, BrowserWindow, dialog, ipcMain } from 'electron';
 import { getAssetURL } from 'electron-snowpack';
 require('@electron/remote/main').initialize();
-import './functions/createTypescript';
+import './functions/createBoilerplate';
 
 let mainWindow: BrowserWindow | null | undefined;
 
