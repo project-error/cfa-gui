@@ -1,8 +1,6 @@
 import React from 'react';
 import { useProject } from '../hooks/useProject';
 import styles from './WizardCompletion.module.scss';
-const { ipcRenderer } = window.require('electron');
-import { Button } from '../../../ui';
 
 export default function WizardCompletion() {
     const {
@@ -14,18 +12,6 @@ export default function WizardCompletion() {
         resourceTemplate,
         resourceDescription,
     } = useProject();
-
-    const handleCreateResource = () => {
-        ipcRenderer.send('createBoilerplate', {
-            resourcePath,
-            resourcePackages,
-            resourceName,
-            resourceAuthor,
-            resourceVersion,
-            resourceTemplate,
-            resourceDescription,
-        });
-    };
 
     return (
         <div className={styles.container}>
@@ -69,8 +55,6 @@ export default function WizardCompletion() {
                     ))}
                 </div>
             </div>
-
-            <Button onClick={handleCreateResource}>Create</Button>
         </div>
     );
 }

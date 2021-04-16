@@ -5,7 +5,11 @@ import { Package } from './Package';
 import styles from './WizardPackages.module.scss';
 
 export const WizardPackages = () => {
-    const { setResourcePackages, resourcePackages } = useProject();
+    const {
+        setResourcePackages,
+        resourcePackages,
+        resourceTemplate,
+    } = useProject();
 
     const handlePackage = (selectedPackage: string) => {
         const tempArr = [...resourcePackages];
@@ -25,34 +29,42 @@ export const WizardPackages = () => {
             <div className={styles.titleSection}>
                 <label>Choose what packages you would like to include</label>
             </div>
-            {/* <Button onClick={() => console.log(project)}>SS</Button> */}
 
-            <div className={styles.packageList}>
-                <Package
-                    packageName="fivem-js"
-                    packageTitle="Fivem-js"
-                    onClick={handlePackage}
-                    isSelected={resourcePackages.includes('fivem-js')}
-                />
-                <Package
-                    packageName="typeorm"
-                    packageTitle="TypeORM"
-                    onClick={handlePackage}
-                    isSelected={resourcePackages.includes('typeorm')}
-                />
-                <Package
-                    packageName="mysql2"
-                    packageTitle="mysql2"
-                    onClick={handlePackage}
-                    isSelected={resourcePackages.includes('mysql2')}
-                />
-                <Package
-                    packageName="esx.js"
-                    packageTitle="esx.js"
-                    onClick={handlePackage}
-                    isSelected={resourcePackages.includes('esx.js')}
-                />
-            </div>
+            {resourceTemplate === 'Lua' ? (
+                <div className={styles.skipText}>
+                    <h1>
+                        You are creating a lua resource no need to select
+                        packages!
+                    </h1>
+                </div>
+            ) : (
+                <div className={styles.packageList}>
+                    <Package
+                        packageName="fivem-js"
+                        packageTitle="Fivem-js"
+                        onClick={handlePackage}
+                        isSelected={resourcePackages.includes('fivem-js')}
+                    />
+                    <Package
+                        packageName="typeorm"
+                        packageTitle="TypeORM"
+                        onClick={handlePackage}
+                        isSelected={resourcePackages.includes('typeorm')}
+                    />
+                    <Package
+                        packageName="mysql2"
+                        packageTitle="mysql2"
+                        onClick={handlePackage}
+                        isSelected={resourcePackages.includes('mysql2')}
+                    />
+                    <Package
+                        packageName="esx.js"
+                        packageTitle="esx.js"
+                        onClick={handlePackage}
+                        isSelected={resourcePackages.includes('esx.js')}
+                    />
+                </div>
+            )}
         </div>
     );
 };

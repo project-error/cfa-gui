@@ -3,6 +3,16 @@
     width: 100%;
     flex: auto;
 
+    .skipText {
+        color: #f40552;
+        font-size: 8px;
+        height: 90%;
+        font-weight: 400;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .titleSection {
         display: flex;
         margin-top: 1rem;

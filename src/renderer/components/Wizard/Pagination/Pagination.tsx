@@ -3,32 +3,53 @@ import { Button } from '../../../ui';
 import { useErrorHandler } from '../hooks/useErrorHandler';
 import { usePagination } from '../hooks/usePagination';
 import { useProject } from '../hooks/useProject';
+const { ipcRenderer } = window.require('electron');
 
 export default function Pagination() {
     const { steps, setSteps } = usePagination();
-    const project = useProject();
     const { error, setError } = useErrorHandler();
 
-    const handleNext = () => {
-        console.log(project);
+    const {
+        resourcePath,
+        resourcePackages,
+        resourceName,
+        resourceAuthor,
+        resourceVersion,
+        resourceTemplate,
+        resourceDescription,
+    } = useProject();
 
+    const handleCreateResource = () => {
+        ipcRenderer.send('createBoilerplate', {
+            resourcePath,
+            resourcePackages,
+            resourceName,
+            resourceAuthor,
+            resourceVersion,
+            resourceTemplate,
+            resourceDescription,
+        });
+    };
+
+    const handleNext = () => {
         if (steps === 1) {
-            if (project.resourcePath == '')
+            if (resourcePath == '')
                 return setError('Please provide a file path.');
-            if (project.resourceName == '')
+            if (resourceName == '')
                 return setError('Please provide a resource name.');
-            if (project.resourceAuthor == '')
+            if (resourceAuthor == '')
                 return setError('Please provide a author name.');
-            if (project.resourceDescription == '')
+            if (resourceDescription == '')
                 return setError('Please provide a description.');
-            if (project.resourceVersion == '')
+            if (resourceVersion == '')
                 return setError('Please provide a resource version.');
         }
 
         if (steps === 2) {
-            if (project.resourceTemplate == '')
+            if (resourceTemplate == '')
                 return setError('Please select a resource template');
         }
+
         setSteps(steps + 1);
         setError(null);
     };
@@ -55,9 +76,13 @@ export default function Pagination() {
                 <Button onClick={handleBack} disabled={steps == 1}>
                     Back
                 </Button>
-                <Button onClick={handleNext} disabled={steps == 4}>
-                    Next
-                </Button>
+                {steps === 4 ? (
+                    <Button onClick={handleCreateResource}>Complete</Button>
+                ) : (
+                    <Button onClick={handleNext} disabled={steps == 4}>
+                        Next
+                    </Button>
+                )}
             </div>
         </div>
     );

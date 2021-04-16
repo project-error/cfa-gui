@@ -2,6 +2,7 @@ import * as cp from 'child_process';
 import fs from 'fs-extra';
 import { createFxmaniest } from '../stubs/fxmanifestTemplate';
 import { ProjectObject } from '../types/project';
+import { Notification } from 'electron';
 
 const TemplateMap: { [key: string]: string } = {
     TypeScript: 'ts',
@@ -37,8 +38,18 @@ export async function createResource(project: ProjectObject) {
             }
         }
 
+        showNotification(project.resourceName);
         console.log(`Created folder ${type}`);
     } catch (error) {
         console.log(error);
     }
 }
+
+const showNotification = (resourceName: string) => {
+    const notification: Electron.NotificationConstructorOptions = {
+        title: 'Create FiveM App',
+        body: `Successfully created ${resourceName} resource.`,
+    };
+
+    new Notification(notification).show();
+};
