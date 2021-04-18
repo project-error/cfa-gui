@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from '../../../ui';
-import { BorderedInput } from '../../../ui/BorderedInput/BorderedInput';
 import { useProject } from '../hooks/useProject';
 import { TemplateItem } from './TemplateItem';
 import styles from './WizardTemplates.module.scss';
@@ -28,16 +26,10 @@ const templates = [
 ];
 
 export const WizardTemplates = () => {
-    const [selectedTemplate, setSelectedTemplate] = useState<null | string>(
-        null,
-    );
-    const { project, setProject } = useProject();
+    const { resourceTemplate, setResourceTemplate } = useProject();
 
     const setTemplate = (temp: string) => {
-        setProject({
-            ...project,
-            templateType: temp,
-        });
+        setResourceTemplate(temp);
     };
 
     return (
@@ -51,7 +43,8 @@ export const WizardTemplates = () => {
                 {templates &&
                     templates.map((temp) => (
                         <TemplateItem
-                            active={project.templateType === temp.type}
+                            key={temp.type}
+                            active={resourceTemplate === temp.type}
                             thumbnail={temp.thumbnail}
                             title={temp.title}
                             description={temp.description}

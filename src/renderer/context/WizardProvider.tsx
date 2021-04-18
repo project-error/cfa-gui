@@ -1,16 +1,39 @@
-import React, { useContext, createContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 
 export const WizardContext = createContext<WizardProps>(undefined);
 
 export const WizardProvider = ({ children }: { children: React.ReactNode }) => {
-    const [project, setProject] = useState<ProjectObject | null>(null);
+    const [resourcePath, setResourcePath] = useState('');
+    const [resourceName, setResourceName] = useState('');
+    const [resourceAuthor, setResourceAuthor] = useState('');
+    const [resourceTemplate, setResourceTemplate] = useState('');
+    const [resourceVersion, setResourceVersion] = useState('');
+    const [resourceDescription, setResourceDescription] = useState('');
+    const [resourcePackages, setResourcePackages] = useState([]);
+
+    const [error, setError] = useState<null | string>(null);
+
     const [steps, setSteps] = useState(1);
 
     const value = {
-        project,
-        setProject,
         steps,
         setSteps,
+        error,
+        setError,
+        resourcePath,
+        resourceName,
+        resourceAuthor,
+        resourcePackages,
+        resourceVersion,
+        resourceTemplate,
+        resourceDescription,
+        setResourcePath,
+        setResourceName,
+        setResourceAuthor,
+        setResourceVersion,
+        setResourceTemplate,
+        setResourceDescription,
+        setResourcePackages,
     };
 
     return (
@@ -21,18 +44,24 @@ export const WizardProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 interface WizardProps {
-    project: ProjectObject;
-    setProject: (project: ProjectObject) => void;
     steps: number;
     setSteps: (step: number) => void;
-}
+    error: string | null;
+    setError: (error: string) => void;
 
-type ProjectObject = {
-    path: string | null;
-    resource: string | null;
-    author: string | null;
-    version: string | null;
-    description: string | null;
-    templateType: string | null;
-    packages?: string[] | null;
-};
+    // Resource related state
+    resourcePath: string;
+    resourceName: string;
+    resourceAuthor: string;
+    resourceVersion: string;
+    resourceTemplate: string;
+    resourceDescription: string;
+    resourcePackages: string[];
+    setResourcePath: (val: string) => void;
+    setResourceTemplate: (val: string) => void;
+    setResourceName: (val: string) => void;
+    setResourcePackages: (val: string[]) => void;
+    setResourceAuthor: (val: string) => void;
+    setResourceVersion: (val: string) => void;
+    setResourceDescription: (val: string) => void;
+}
