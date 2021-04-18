@@ -38,18 +38,23 @@ export async function createResource(project: ProjectObject) {
             }
         }
 
-        showNotification(project.resourceName);
+        showNotification(project.resourceName, resourcePath);
         console.log(`Created folder ${type}`);
     } catch (error) {
         console.log(error);
     }
 }
 
-const showNotification = (resourceName: string) => {
-    const notification: Electron.NotificationConstructorOptions = {
+const showNotification = (resourceName: string, path: string) => {
+    console.log(path);
+    const notification = new Notification({
         title: 'Create FiveM App',
         body: `Successfully created ${resourceName} resource.`,
-    };
+    });
 
-    new Notification(notification).show();
+    notification.show();
+
+    notification.on('click', () => {
+        cp.spawn('explorer', [path]);
+    });
 };
