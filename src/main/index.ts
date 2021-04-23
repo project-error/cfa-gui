@@ -1,10 +1,3 @@
-import { app, BrowserWindow, dialog, ipcMain } from 'electron';
-import { getAssetURL } from 'electron-snowpack';
-require('@electron/remote/main').initialize();
-import './functions/createBoilerplate';
-
-let mainWindow: BrowserWindow | null | undefined;
-
 import { Command } from 'commander';
 
 // Test args, just used for testing the commander tool in dev mode
@@ -13,7 +6,7 @@ const testArgs = ['create', 'TestApp', '-t', '@template/test-app'];
 const cli = new Command();
 
 // Set the version from the package.json file
-cli.version(app.getVersion());
+cli.version('v1.0.0');
 
 // The create command. Used for creating a resource without using the gui interface.
 cli.command('create <name>')
@@ -61,56 +54,3 @@ if (process.argv.length > 2) {
     cli.parse();
     console.log(cli.opts());
 }
-
-function createMainWindow(): BrowserWindow {
-    const window = new BrowserWindow({
-        height: 800,
-        width: 1400,
-        frame: true,
-        resizable: false,
-        webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-            enableRemoteModule: true,
-        },
-    });
-
-    if (process.env.MODE !== 'production') {
-        window.webContents.openDevTools();
-    }
-
-    window.loadURL(getAssetURL('index.html'));
-
-    window.on('closed', (): void => {
-        mainWindow = null;
-    });
-
-    window.webContents.on('devtools-opened', (): void => {
-        window.focus();
-        setImmediate((): void => {
-            window.focus();
-        });
-    });
-
-    return window;
-}
-
-// quit application when all windows are closed
-app.on('window-all-closed', (): void => {
-    // on macOS it is common for applications to stay open until the user explicitly quits
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
-});
-
-app.on('activate', (): void => {
-    // on macOS it is common to re-create a window even after all windows have been closed
-    if (mainWindow === null) {
-        mainWindow = createMainWindow();
-    }
-});
-
-// create main BrowserWindow when electron is ready
-app.on('ready', (): void => {
-    mainWindow = createMainWindow();
-});
