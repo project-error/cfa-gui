@@ -1,4 +1,4 @@
-import { ipcMain, Notification } from 'electron';
+import { ipcMain } from 'electron';
 import { ProjectObject } from '../types/project';
 import { createResource } from './createResource';
 

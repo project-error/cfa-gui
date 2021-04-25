@@ -26,14 +26,12 @@ export const createFxmaniest = (json: { [key: string]: string | string[] }) => {
 
     for (let [key, value] of Object.entries(json)) {
         if (Array.isArray(value)) {
-            value
-                .filter((v) => typeof v === 'string')
-                .map((v: string, i: number, array: string[]) => {
-                    if (i == 0) output += `${key} {\n`;
-                    output += `${indent}'${v}'${
-                        i === array.length - 1 ? '' : ','
-                    }\n`;
-                });
+            value.map((v: string, i: number, array: string[]) => {
+                if (i == 0) output += `${key} {\n`;
+                output += `${indent}'${v}'${
+                    i === array.length - 1 ? '' : ','
+                }\n`;
+            });
             output += '}\n';
         } else {
             output += `${key} '${value}'\n\n`;

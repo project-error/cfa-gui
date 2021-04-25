@@ -20,7 +20,21 @@ export async function createResource(project: ProjectObject) {
         await fs.copy(`./src/project_templates/${type}`, resourcePath);
 
         // writes fxmanifest to resource
-        const fxmanifest = createFxmaniest(project);
+        const fxmanifest = createFxmaniest({
+            fx_version: 'cerulean',
+            game: 'gta5',
+
+            name: project.resourceName,
+            author: project.resourceAuthor,
+            version: project.resourceVersion,
+            description: project.resourceDescription,
+
+            client_script:
+                type === 'ts' ? 'dist/client/*.client.js' : 'client/*.lua',
+            server_script:
+                type === 'ts' ? 'dist/server/*.server.js' : 'server/*.lua',
+        });
+
         await fs.writeFile(`${resourcePath}/fxmanifest.lua`, fxmanifest);
 
         if (type !== 'lua') {
