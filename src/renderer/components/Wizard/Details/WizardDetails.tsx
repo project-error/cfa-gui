@@ -4,7 +4,20 @@ import { BorderedInput } from '../../../ui/BorderedInput/BorderedInput';
 import { useProject } from '../hooks/useProject';
 import styles from '../Wizard.module.scss';
 
-const { dialog } = window.require('@electron/remote');
+const { dialog, process } = window.require('@electron/remote');
+
+function GetCLIPath(): string {
+    // Check if the gui command is used and get the index
+    const CommandIndex = process.argv.indexOf('gui');
+    if (CommandIndex > 0 && process.argv.length > CommandIndex) {
+        // Get the path used with the command
+        const path = process.argv[CommandIndex + 1];
+        // Remove the double quotes
+        return path.replaceAll('"', '');
+    }
+    // else return null and use localStorage
+    return null;
+}
 
 export const WizardDetails = () => {
     const {
@@ -32,7 +45,7 @@ export const WizardDetails = () => {
 
     // Used to check if we have a stored path in our local storage
     useEffect(() => {
-        const prevPath = localStorage.getItem('previousPath');
+        const prevPath = GetCLIPath() || localStorage.getItem('previousPath');
         if (prevPath) {
             setResourcePath(prevPath);
         }
