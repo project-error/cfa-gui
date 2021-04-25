@@ -1,6 +1,6 @@
 import * as cp from 'child_process';
 import fs from 'fs-extra';
-import { createFxmaniest } from '../stubs/fxmanifestTemplate';
+import { createFxmaniest } from '../stubs/createFxmanifest';
 import { ProjectObject } from '../types/project';
 import { Notification } from 'electron';
 
