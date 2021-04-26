@@ -22,7 +22,8 @@
         "react": "^17.0.0",
         "react-dom": "^17.0.0",
         "react-icons": "^4.2.0",
-        "rimraf": "^3.0.2"
+        "rimraf": "^3.0.2",
+        "tar": "^6.1.0"
     },
     "devDependencies": {
         "@snowpack/plugin-dotenv": "^2.0.5",
@@ -32,11 +33,13 @@
         "@snowpack/web-test-runner-plugin": "^0.2.0",
         "@testing-library/react": "^11.0.0",
         "@types/chai": "^4.2.13",
+        "@types/fs-extra": "^9.0.11",
         "@types/mocha": "^8.2.0",
         "@types/node": "^14.14.41",
         "@types/react": "^17.0.0",
         "@types/react-dom": "^17.0.0",
         "@types/snowpack-env": "^2.3.2",
+        "@types/tar": "^4.0.4",
         "@web/test-runner": "^0.12.0",
         "chai": "^4.2.0",
         "electron": "^12.0.2",

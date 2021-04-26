@@ -4,8 +4,16 @@ import { createProject } from './functions/createProject';
 
 // Function executed for quiting the electron process
 function quitElectronProcess(): void {
-    // app.quit();
-    // app.exit(1);
+    if (app.isReady()) {
+        // If the app is ready quit
+        app.quit();
+        app.exit(1);
+    }
+    app.whenReady().then(() => {
+        // If not the wait for the process and then quit
+        app.quit();
+        app.exit(1);
+    });
 }
 
 // Create the commander object
@@ -35,17 +43,20 @@ cli.command('create <name>')
     )
     .action((name: string, options: any) => {
         console.log(options);
-        createProject({
-            template: 'react',
-            templateOptions: {},
-            project: {
-                name: 'test',
-                author: 'Aleks',
-                description: 'oh yes',
-                version: '1.0.0',
+        createProject(
+            {
+                template: 'react',
+                templateOptions: {},
+                project: {
+                    name: 'test',
+                    author: 'Aleks',
+                    description: 'oh yes',
+                    version: '1.0.0',
+                },
+                projectPath: 'C:\\Dev',
             },
-            projectPath: 'C:\\Dev',
-        });
+            true,
+        ).then(quitElectronProcess);
     });
 
 // The gui command.
@@ -63,12 +74,6 @@ if (process.env.MODE !== 'production')
 if (process.argv.length > 2) {
     // Get the CLI args
     const { args: cliArgs } = cli.parse(); // parse the cli args and execute the commander commands
-
-    // If we use any other command than gui then quit the electron process
-    if (cliArgs[0].toLowerCase() !== 'gui') {
-        if (app.isReady()) quitElectronProcess(); // If the app is ready quit
-        app.whenReady().then(quitElectronProcess); // If not the wait for the process and then quit
-    }
 } else {
     // Launch the GUI
     import('./WinManager').then((): void => console.log('Launching the GUI'));
