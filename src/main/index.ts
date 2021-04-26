@@ -1,10 +1,11 @@
 import { Command } from 'commander';
 import { app } from 'electron';
+import { createProject } from './functions/createProject';
 
 // Function executed for quiting the electron process
 function quitElectronProcess(): void {
-    app.quit();
-    app.exit(1);
+    // app.quit();
+    // app.exit(1);
 }
 
 // Create the commander object
@@ -34,6 +35,17 @@ cli.command('create <name>')
     )
     .action((name: string, options: any) => {
         console.log(options);
+        createProject({
+            template: 'react',
+            templateOptions: {},
+            project: {
+                name: 'test',
+                author: 'Aleks',
+                description: 'oh yes',
+                version: '1.0.0',
+            },
+            projectPath: 'C:\\Dev',
+        });
     });
 
 // The gui command.
@@ -45,7 +57,7 @@ cli.command('gui <path>').action((path: string, options: any) => {
 
 // For easy debugging we use some test args in Development mode
 if (process.env.MODE !== 'production')
-    process.argv = [...process.argv, 'gui', '"C:/Development/test hello/"'];
+    process.argv = [...process.argv, 'create', 'test'];
 
 // If we have more than the default CLI args passed we want to use the cli tool instead of the GUI interface
 if (process.argv.length > 2) {

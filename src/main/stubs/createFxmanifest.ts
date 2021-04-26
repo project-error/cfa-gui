@@ -34,7 +34,7 @@ export const createFxmaniest = (json: { [key: string]: string | string[] }) => {
             });
             output += '}\n';
         } else {
-            output += `${key} '${value}'\n\n`;
+            output += `${key} '${value}'\n`;
         }
     }
     return output;
