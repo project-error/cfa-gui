@@ -1,75 +1,75 @@
 import fs from 'fs-extra';
 import path from 'path';
-import os from 'os';
-import https from 'https';
+import execa from 'execa';
 
 import { createFxmaniest } from '../stubs/createFxmanifest';
 import { CFAProjectOptions } from '../types/project';
-import { Notification } from 'electron';
-import axios from 'axios';
-import tar from 'tar';
 
-function ExtractRemoteArchive(url: string, path: string): Promise<void> {
-    let resolve: any, reject: any;
-    const promise = new Promise<void>((res: any, rej: any) => {
-        resolve = res;
-        reject = rej;
-    });
+async function validateProjectTemplate(pkg: string): Promise<boolean> {
+    let keywords;
+    try {
+        const { stdout: output } = await execa('npm', [
+            'info',
+            pkg,
+            'keywords',
+            '--json',
+        ]);
+        keywords = JSON.parse(output);
+    } catch (e) {
+        console.log();
+        if (e.stderr) {
+            console.error(`Unable to find ${pkg}, in the npm registry.`);
+        } else {
+            console.error(e);
+        }
+        return false;
+    }
 
-    https.get(url, function (res) {
-        res.pipe(
-            tar.x({
-                cwd: path,
-            }),
-        )
-            .on('finish', resolve)
-            .on('error', reject);
-    });
-
-    return promise;
+    if (!keywords || !keywords.includes('cfa-template')) {
+        console.error(
+            '\nThe template is not a CFA template (missing "cfa-template" keyword in package.json)',
+        );
+        return false;
+    }
+    return true;
 }
 
 export async function createProject(options: CFAProjectOptions, isCLI = false) {
-    console.log('Creating project ...');
-    let { data } = await axios.get(
-        `https://registry.npmjs.org/${options.template}/latest`,
-    );
-    console.log('Fetched data from NPM!');
-    console.log(data);
+    console.log(`Checking if ${options.template} is a valid CFA template`);
+    if (await validateProjectTemplate(options.template)) {
+        console.log('\nGenerating Project:');
+        console.log(`  - Using template: ${options.template}`);
+        console.log(`  - Creating project in: ${options.projectPath}`);
 
-    // Checks if the npm package has the "cfa" keyword
-    if (!data?.keywords?.includes('cfa')) {
-        await fs.ensureDir(
-            path.join(os.tmpdir(), '/cfa-gui/' + options.template),
-        );
-        let entries = await fs.readdir(
-            path.join(os.tmpdir(), '/cfa-gui/' + options.template),
-        );
-        if (!entries.includes(!data?.version)) {
-            await fs.ensureDir(
-                path.join(
-                    os.tmpdir(),
-                    '/cfa-gui/' + options.template,
-                    data?.version,
-                ),
-            );
-            console.log(data?.dist?.tarball);
-            console.log(
-                path.join(
-                    os.tmpdir(),
-                    '/cfa-gui/' + options.template,
-                    data?.version,
-                ),
-            );
+        // Create the project directory if it doesn't exist
+        await fs.ensureDir(options.projectPath);
 
-            await ExtractRemoteArchive(
-                data?.dist?.tarball,
-                path.join(
-                    os.tmpdir(),
-                    '/cfa-gui/' + options.template,
-                    data?.version,
-                ),
+        // this will be deleted later, just needed for installation
+        await fs.writeFile(
+            path.resolve(options.projectPath, 'package.json'),
+            `{"name":"cfa-template"}`,
+        );
+        try {
+            // install the package
+            await execa(
+                'npm',
+                ['install', options.template, '--ignore-scripts'],
+                {
+                    cwd: options.projectPath,
+                    all: true,
+                },
             );
+        } catch (err) {
+            console.error(err.all);
+            throw err;
         }
+
+        await fs.copy(
+            path.resolve(options.projectPath, 'node_modules', options.template),
+            options.projectPath,
+        );
+        await fs.remove(path.resolve(options.projectPath, 'node_modules'));
+
+        // Do the other fancy code
     }
 }
