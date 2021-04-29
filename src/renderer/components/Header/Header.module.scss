@@ -2,10 +2,6 @@
     display: flex;
     justify-items: center;
     justify-content: space-between;
-    background-image: url('https://beta.iodine.gg/6c5fd.png');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
     width: 100%;
     background-color: #151517;
     padding: 4px;
@@ -16,6 +12,9 @@
 
 .headerTitle {
     color: #fff;
+    font-weight: 300;
+    color: #f40552;
+    margin-left: 10px;
 }
 
 .headerOptions {
@@ -25,34 +24,11 @@
     margin: 10px;
 }
 
-.closeButton {
+.actionButton {
     position: relative;
     width: 18px;
     height: 18px;
     cursor: pointer;
-    background-color: #f40552;
-    border-radius: 50%;
     margin-right: 10px;
-    -webkit-app-region: no-drag;
-}
-
-.minimizeButton {
-    position: relative;
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-    background-color: #f4c805;
-    border-radius: 50%;
-    margin-right: 10px;
-    -webkit-app-region: no-drag;
-}
-
-.maximizeButton {
-    position: relative;
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-    background-color: #05f461;
-    border-radius: 50%;
     -webkit-app-region: no-drag;
 }
