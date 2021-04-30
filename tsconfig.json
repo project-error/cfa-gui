@@ -1,6 +1,6 @@
 {
     "extends": "electron-snowpack/config/tsconfig.json",
-    "include": ["src", "types"],
+    "include": ["src", "types", "cli"],
     "compilerOptions": {
         "module": "esnext",
         "target": "esnext",
