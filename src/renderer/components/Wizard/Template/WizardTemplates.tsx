@@ -51,7 +51,9 @@ export const WizardTemplates = () => {
                     res.data.keywords.includes('cfa-template')
                 ) {
                     TemplateList.push({
-                        title: res.data?.title ? res.data.title : pkg,
+                        title:
+                            (res.data?.title ? res.data.title : pkg) +
+                            ` (${res.data.version})`,
                         description: res.data?.description
                             ? res.data.description
                             : 'No description provided',
@@ -77,7 +79,9 @@ export const WizardTemplates = () => {
                     templates.map((template, i) => (
                         <TemplateItem
                             key={i}
-                            active={resourceTemplate === template}
+                            active={
+                                resourceTemplate.package === template.package
+                            }
                             template={template}
                             onClick={() => setResourceTemplate(template)}
                         />

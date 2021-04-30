@@ -3,10 +3,10 @@ import { Checkbox } from '../../../ui/Checkbox/Checkbox';
 import styles from './WizardPackages.module.scss';
 
 interface PackageProps {
-    packageName: string;
-    packageTitle: string;
-    isSelected: boolean;
-    onClick: (pack: string) => void;
+    packageName?: string;
+    packageTitle?: string;
+    isSelected?: boolean;
+    onClick?: (pack: string) => void;
 }
 
 export const Package = ({

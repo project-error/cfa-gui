@@ -14,7 +14,7 @@ export const WizardProvider = ({ children }: { children: React.ReactNode }) => {
     });
     const [resourceVersion, setResourceVersion] = useState('');
     const [resourceDescription, setResourceDescription] = useState('');
-    const [resourcePackages, setResourcePackages] = useState([]);
+    const [resourceOptions, setResourceOptions] = useState({});
 
     const [error, setError] = useState<null | string>(null);
 
@@ -28,7 +28,7 @@ export const WizardProvider = ({ children }: { children: React.ReactNode }) => {
         resourcePath,
         resourceName,
         resourceAuthor,
-        resourcePackages,
+        resourceOptions,
         resourceVersion,
         resourceTemplate,
         resourceDescription,
@@ -38,7 +38,7 @@ export const WizardProvider = ({ children }: { children: React.ReactNode }) => {
         setResourceVersion,
         setResourceTemplate,
         setResourceDescription,
-        setResourcePackages,
+        setResourceOptions,
     };
 
     return (
@@ -68,11 +68,11 @@ interface WizardProps {
     resourceVersion: string;
     resourceTemplate: CFATemplate;
     resourceDescription: string;
-    resourcePackages: string[];
+    resourceOptions: { [key: string]: any };
     setResourcePath: (val: string) => void;
     setResourceTemplate: (val: CFATemplate) => void;
     setResourceName: (val: string) => void;
-    setResourcePackages: (val: string[]) => void;
+    setResourceOptions: (val: { [key: string]: any }) => void;
     setResourceAuthor: (val: string) => void;
     setResourceVersion: (val: string) => void;
     setResourceDescription: (val: string) => void;

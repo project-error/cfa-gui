@@ -4,7 +4,7 @@ import { WizardContext } from '../../../context/WizardProvider';
 export const useProject = () => {
     const {
         resourcePath,
-        resourcePackages,
+        resourceOptions,
         resourceName,
         resourceAuthor,
         resourceVersion,
@@ -15,7 +15,7 @@ export const useProject = () => {
         setResourceAuthor,
         setResourceTemplate,
         setResourceVersion,
-        setResourcePackages,
+        setResourceOptions,
         setResourceDescription,
     } = useContext(WizardContext);
     return {
@@ -24,14 +24,14 @@ export const useProject = () => {
         resourceAuthor,
         resourceVersion,
         resourceTemplate,
-        resourcePackages,
+        resourceOptions,
         resourceDescription,
         setResourcePath,
         setResourceTemplate,
         setResourceName,
         setResourceAuthor,
         setResourceVersion,
-        setResourcePackages,
+        setResourceOptions,
         setResourceDescription,
     };
 };
