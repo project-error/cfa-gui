@@ -12,3 +12,19 @@ module.exports = {
         '@snowpack/plugin-sass',
     ],
 };
+
+console.log(`[esbuild] Building CLI application`);
+require('esbuild')
+    .build({
+        entryPoints: ['./src/cli/index.ts'],
+        bundle: true,
+        minify: true,
+        outfile: 'bin/cli.js',
+        platform: 'node',
+    })
+    .then(({ warnings }) => {
+        const fs = require('fs-extra');
+        warnings.forEach((warn) => console.log(`[CLI Build Warning] ${warn}`));
+        fs.copySync('./src/cli/static', './bin/');
+    })
+    .catch(() => process.exit(1));

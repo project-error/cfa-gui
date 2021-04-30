@@ -2,7 +2,6 @@
     "name": "cfa",
     "version": "0.0.0",
     "scripts": {
-        "build:cli": "esbuild ./src/cli/index.ts --bundle --minify --platform=node --outfile=dist/bin/cli.js",
         "build": "electron-snowpack build",
         "clean": "electron-snowpack clean",
         "dev": "electron-snowpack dev",
@@ -54,6 +53,9 @@
         "typescript": "^4.0.0"
     },
     "build": {
-        "extends": "electron-snowpack/config/electron-builder.js"
+        "extends": "electron-snowpack/config/electron-builder.js",
+        "extraFiles": [
+            "./bin"
+        ]
     }
 }
