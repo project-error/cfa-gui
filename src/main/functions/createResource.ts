@@ -30,9 +30,17 @@ export async function createResource(project: ProjectObject) {
             description: project.resourceDescription,
 
             client_script:
-                type === 'ts' ? 'dist/client/*.client.js' : 'client/*.lua',
+                type === 'ts'
+                    ? 'dist/client/*.client.js'
+                    : type === 'js'
+                    ? 'client/**/*.js'
+                    : 'client/**/*.lua',
             server_script:
-                type === 'ts' ? 'dist/server/*.server.js' : 'server/*.lua',
+                type === 'ts'
+                    ? 'dist/server/*.server.js'
+                    : type === 'js'
+                    ? 'server/**/*.js'
+                    : 'server/**/*.lua',
         });
 
         await fs.writeFile(`${resourcePath}/fxmanifest.lua`, fxmanifest);
