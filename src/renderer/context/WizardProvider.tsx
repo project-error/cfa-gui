@@ -49,8 +49,8 @@ export const WizardProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 export interface CFATemplate {
-    title: string;
-    description: string;
+    title?: string;
+    description?: string;
     thumbnail?: string;
     package: string;
 }

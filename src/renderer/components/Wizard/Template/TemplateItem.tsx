@@ -1,6 +1,7 @@
 import React from 'react';
 import { CFATemplate } from '../../../context/WizardProvider';
 import styles from './WizardTemplates.module.scss';
+import CFALogo from '../../../assets/cfa-logo.png';
 
 interface TemplateItemProps extends React.ComponentProps<any> {
     template: CFATemplate;
@@ -19,11 +20,7 @@ export const TemplateItem = ({
             onClick={onClick}
         >
             <img
-                src={
-                    template.thumbnail
-                        ? template.thumbnail
-                        : `https://cdn.jsdelivr.net/npm/${template.package}@latest/thumbnail.png`
-                }
+                src={template.thumbnail ? template.thumbnail : CFALogo}
                 className={styles.thumbnail}
             />
             <div className={styles.info}>

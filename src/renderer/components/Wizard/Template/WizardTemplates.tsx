@@ -6,78 +6,63 @@ import { SiTypescript, SiJavascript, SiLua } from 'react-icons/si';
 import { CFATemplate } from '../../../context/WizardProvider';
 import axios from 'axios';
 
-async function validateTemplatePackage(pkg: string): Promise<boolean> {
-    let response;
+const templatePackages: string[] = ['cfa-template-lua'];
+
+async function fetchTemplateData(pkg: string): Promise<any> {
     try {
-        response = await axios.get(
-            `https://cdn.jsdelivr.net/npm/${pkg}@latest/package.json`,
-        );
-        // Success 🎉
-        // console.log(response);
+        return await axios.get(`https://unpkg.com/${pkg}@latest/package.json`);
     } catch (error) {
-        return false;
+        return;
     }
-
-    return (
-        !!response.data?.keywords &&
-        response.data.keywords.includes('cfa-template')
-    );
-}
-
-function mapAsync<T1, T2>(
-    array: T1[],
-    callback: (value: T1, index: number, array: T1[]) => Promise<T2>,
-): Promise<T2[]> {
-    return Promise.all(array.map(callback));
-}
-
-async function filterAsync<T>(
-    array: T[],
-    callback: (value: T, index: number, array: T[]) => Promise<boolean>,
-): Promise<T[]> {
-    const filterMap = await mapAsync(array, callback);
-    return array.filter((_, index) => filterMap[index]);
 }
 
 export const WizardTemplates = () => {
     const { resourceTemplate, setResourceTemplate } = useProject();
 
-    const [templates, setTemplates] = useState<CFATemplate[]>([
-        {
-            // type: 'TypeScript',
-            title: 'Typescript Resource',
-            description: 'A complete starter kit with tsconfig and webpack.',
-            // thumbnail: <SiTypescript color="white" size={90} />,
-            package: 'cfa-template-luaddd', // FIX: Replace in the future
-        },
-        {
-            // type: 'JavaScript',
-            title: 'Javascript Resource',
-            description: 'A simple boilerplate with webpack.',
-            // thumbnail: <SiJavascript color="white" size={90} />,
-            package: 'cfa-template-lua', // FIX: Replace in the future
-        },
-        {
-            // type: 'Lua',
-            title: 'Lua Resource',
-            description: 'Includes a client and server file.',
-            // thumbnail: <SiLua color="white" size={90} />,
-            package: 'cfa-template-lua',
-        },
-    ]);
+    const [templates, setTemplates] = useState<CFATemplate[]>();
 
     useEffect(() => {
-        (async () => {
-            return await filterAsync(
-                templates,
-                async (template) =>
-                    await validateTemplatePackage(template.package),
-            );
-        })().then((temp) => {
-            setTemplates(temp);
-        });
+        (async (): Promise<CFATemplate[] | undefined> => {
+            let TemplateList: CFATemplate[] = [];
 
-        // templates.filter();
+            function GetThumbnail(pkg: string, data: any): string {
+                if (!!data?.thumbnail && typeof data.thumbnail === 'string') {
+                    if (
+                        !data.thumbnail.startsWith('https://') &&
+                        !data.thumbnail.startsWith('http://')
+                    ) {
+                        return new URL(
+                            data.thumbnail,
+                            `https://unpkg.com/${pkg}@latest/`,
+                        ).href;
+                    } else {
+                        return data.thumbnail;
+                    }
+                } else {
+                    return null;
+                }
+            }
+
+            for (let pkg of templatePackages) {
+                const res = await fetchTemplateData(pkg);
+                if (
+                    res &&
+                    !!res?.data?.keywords &&
+                    res.data.keywords.includes('cfa-template')
+                ) {
+                    TemplateList.push({
+                        title: res.data?.title ? res.data.title : pkg,
+                        description: res.data?.description
+                            ? res.data.description
+                            : 'No description provided',
+                        thumbnail: GetThumbnail(pkg, res.data),
+                        package: pkg,
+                    });
+                }
+            }
+
+            return TemplateList;
+        })().then((temps: CFATemplate[]) => (temps ? setTemplates(temps) : 0));
     }, []);
 
     return (
