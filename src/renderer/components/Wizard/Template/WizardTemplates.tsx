@@ -10,7 +10,7 @@ const templatePackages: string[] = ['cfa-template-lua'];
 
 async function fetchTemplateData(pkg: string): Promise<any> {
     try {
-        return await axios.get(`https://unpkg.com/${pkg}@latest/package.json`);
+        return await axios.get(`https://cdn.skypack.dev/${pkg}/package.json`);
     } catch (error) {
         return;
     }
@@ -33,7 +33,7 @@ export const WizardTemplates = () => {
                     ) {
                         return new URL(
                             data.thumbnail,
-                            `https://unpkg.com/${pkg}@latest/`,
+                            `https://cdn.jsdelivr.net/npm/${pkg}@${data.version}/`,
                         ).href;
                     } else {
                         return data.thumbnail;
