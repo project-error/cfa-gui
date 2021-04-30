@@ -4,9 +4,9 @@ import execa from 'execa';
 
 import { createFxmaniest } from '../stubs/createFxmanifest';
 import { CFAProjectOptions } from '../types/project';
-import { ipcMain } from '@electron/remote';
+import { ipcMain } from 'electron';
 
-async function validateProjectTemplate(pkg: string): Promise<boolean> {
+export async function validateProjectTemplate(pkg: string): Promise<boolean> {
     let keywords;
     try {
         const { stdout: output } = await execa('npm', [

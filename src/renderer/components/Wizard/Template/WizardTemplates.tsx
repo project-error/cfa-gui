@@ -3,34 +3,34 @@ import { useProject } from '../hooks/useProject';
 import { TemplateItem } from './TemplateItem';
 import styles from './WizardTemplates.module.scss';
 import { SiTypescript, SiJavascript, SiLua } from 'react-icons/si';
+import { CFATemplate } from '../../../context/WizardProvider';
 
-const templates = [
+const templates: CFATemplate[] = [
     {
-        type: 'TypeScript',
+        // type: 'TypeScript',
         title: 'Typescript Resource',
         description: 'A complete starter kit with tsconfig and webpack.',
-        thumbnail: <SiTypescript color="white" size={90} />,
+        // thumbnail: <SiTypescript color="white" size={90} />,
+        package: 'cfa-template-lua', // FIX: Replace in the future
     },
     {
-        type: 'JavaScript',
+        // type: 'JavaScript',
         title: 'Javascript Resource',
         description: 'A simple boilerplate with webpack.',
-        thumbnail: <SiJavascript color="white" size={90} />,
+        // thumbnail: <SiJavascript color="white" size={90} />,
+        package: 'cfa-template-lua', // FIX: Replace in the future
     },
     {
-        type: 'Lua',
+        // type: 'Lua',
         title: 'Lua Resource',
         description: 'Includes a client and server file.',
-        thumbnail: <SiLua color="white" size={90} />,
+        // thumbnail: <SiLua color="white" size={90} />,
+        package: 'cfa-template-lua',
     },
 ];
 
 export const WizardTemplates = () => {
     const { resourceTemplate, setResourceTemplate } = useProject();
-
-    const setTemplate = (temp: string) => {
-        setResourceTemplate(temp);
-    };
 
     return (
         <div className={styles.container}>
@@ -41,15 +41,12 @@ export const WizardTemplates = () => {
 
             <div className={styles.templateList}>
                 {templates &&
-                    templates.map((temp) => (
+                    templates.map((template, i) => (
                         <TemplateItem
-                            key={temp.type}
-                            active={resourceTemplate === temp.type}
-                            thumbnail={temp.thumbnail}
-                            title={temp.title}
-                            description={temp.description}
-                            type={temp.type}
-                            selectTemplate={(type) => setTemplate(type)}
+                            key={i}
+                            active={resourceTemplate === template}
+                            template={template}
+                            onClick={() => setResourceTemplate(template)}
                         />
                     ))}
             </div>

@@ -1,33 +1,34 @@
 import React from 'react';
+import { CFATemplate } from '../../../context/WizardProvider';
 import styles from './WizardTemplates.module.scss';
 
-interface TemplateItemProps {
-    thumbnail: React.ReactNode;
-    title: string;
-    description: string;
-    type: string;
+interface TemplateItemProps extends React.ComponentProps<any> {
+    template: CFATemplate;
     active: boolean;
-    selectTemplate: (e: string) => void;
 }
 
 export const TemplateItem = ({
-    thumbnail,
-    title,
-    description,
-    selectTemplate,
-    type,
+    onClick,
     active,
+    template,
 }: TemplateItemProps) => {
     return (
         <div
             className={styles.template}
             style={{ boxShadow: active ? '0px 0px 3px 2px #f40552' : 'none' }}
-            onClick={() => selectTemplate(type)}
+            onClick={onClick}
         >
-            <div className={styles.thumbnail}>{thumbnail}</div>
+            <img
+                src={
+                    template.thumbnail
+                        ? template.thumbnail
+                        : `https://cdn.jsdelivr.net/npm/${template.package}@latest/thumbnail.png`
+                }
+                className={styles.thumbnail}
+            />
             <div className={styles.info}>
-                <h1>{title}</h1>
-                <p>{description}</p>
+                <h1>{template.title}</h1>
+                <p>{template.description}</p>
             </div>
         </div>
     );

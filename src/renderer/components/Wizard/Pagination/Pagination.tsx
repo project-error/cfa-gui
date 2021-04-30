@@ -46,8 +46,8 @@ export default function Pagination() {
         }
 
         if (steps === 2) {
-            if (resourceTemplate == '')
-                return setError('Please select a resource template');
+            // if (resourceTemplate == '')
+            // return setError('Please select a resource template');
         }
 
         setSteps(steps + 1);
