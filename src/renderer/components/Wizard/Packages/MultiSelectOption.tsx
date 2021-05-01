@@ -38,9 +38,7 @@ export const MultiSelectOption = (props: IMultiSelectOptionProps) => {
     return (
         <div>
             {props.data?.message ? (
-                <h1 className={styles.MultiSelectHeader}>
-                    {props.data?.message}
-                </h1>
+                <h1 className={styles.OptionHeader}>{props.data?.message}</h1>
             ) : null}
             <div>
                 {toggles.map((isChecked, i) => {

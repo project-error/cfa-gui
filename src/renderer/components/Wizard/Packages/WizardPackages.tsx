@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useProject } from '../hooks/useProject';
 import { MultiSelectOption } from './MultiSelectOption';
-import { Package } from './Package';
+// import { Package } from './Package';
+import { SelectOption } from './SelectOption';
+import { ToggleOption } from './ToggleOption';
 import styles from './WizardPackages.module.scss';
 
 const OptionComponents: any = {
-    select: Package,
+    select: SelectOption,
     multiselect: MultiSelectOption,
-    toggle: Package,
+    toggle: ToggleOption,
 };
 
 export const WizardPackages = () => {
@@ -24,7 +26,7 @@ export const WizardPackages = () => {
         if (resourceTemplate.package && resourceTemplate.package.length > 0)
             import(`https://cdn.skypack.dev/${resourceTemplate.package}`).then(
                 (config) => {
-                    // console.log(config.options);
+                    console.log(config.options);
                     setTemplateOptions(config.options);
                 },
             );
