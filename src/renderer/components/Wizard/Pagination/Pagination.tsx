@@ -11,7 +11,7 @@ export default function Pagination() {
 
     const {
         resourcePath,
-        resourcePackages,
+        resourceOptions,
         resourceName,
         resourceAuthor,
         resourceVersion,
@@ -20,14 +20,16 @@ export default function Pagination() {
     } = useProject();
 
     const handleCreateResource = () => {
-        ipcRenderer.send('createBoilerplate', {
-            resourcePath,
-            resourcePackages,
-            resourceName,
-            resourceAuthor,
-            resourceVersion,
-            resourceTemplate,
-            resourceDescription,
+        ipcRenderer.send('createProject', {
+            template: resourceTemplate.package,
+            templateOptions: resourceOptions,
+            project: {
+                name: resourceName,
+                author: resourceAuthor,
+                description: resourceDescription,
+                version: resourceVersion,
+            },
+            projectPath: resourcePath,
         });
     };
 
@@ -46,8 +48,8 @@ export default function Pagination() {
         }
 
         if (steps === 2) {
-            // if (resourceTemplate == '')
-            // return setError('Please select a resource template');
+            if (resourceTemplate.package == null)
+                return setError('Please select a resource template');
         }
 
         setSteps(steps + 1);

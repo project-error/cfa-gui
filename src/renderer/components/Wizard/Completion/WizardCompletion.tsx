@@ -5,7 +5,6 @@ import styles from './WizardCompletion.module.scss';
 export default function WizardCompletion() {
     const {
         resourcePath,
-        resourcePackages,
         resourceName,
         resourceAuthor,
         resourceVersion,
@@ -39,20 +38,9 @@ export default function WizardCompletion() {
                     <label>
                         Description: <span>{resourceDescription}</span>
                     </label>
-                </div>
-                <div className={styles.selectionList}>
-                    <div>
-                        <h3 className={styles.listTitle}>Template</h3>
-                    </div>
                     <label>
-                        Type: <span>{resourceTemplate}</span>
+                        Template: <span>{resourceTemplate.title}</span>
                     </label>
-                    <label>Pacakges:</label>
-                    {resourcePackages?.map((pg) => (
-                        <label key={pg}>
-                            <span>{pg}</span>
-                        </label>
-                    ))}
                 </div>
             </div>
         </div>

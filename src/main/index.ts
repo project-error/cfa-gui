@@ -2,6 +2,7 @@ import { app, BrowserWindow, dialog, ipcMain } from 'electron';
 import { getAssetURL } from 'electron-snowpack';
 require('@electron/remote/main').initialize();
 import './functions/createBoilerplate';
+import './functions/createProject';
 
 let mainWindow: BrowserWindow | null | undefined;
 

@@ -4,7 +4,7 @@ import execa from 'execa';
 
 import { createFxmaniest } from '../stubs/createFxmanifest';
 import { CFAProjectOptions } from '../types/project';
-import { ipcMain } from 'electron';
+import { ipcMain, Notification } from 'electron';
 
 export async function validateProjectTemplate(pkg: string): Promise<boolean> {
     let keywords;
@@ -120,13 +120,23 @@ export async function createProject(
                 shared_script: 'shared file here',
             }),
         );
+        showNotification({
+            body: 'Project Completed',
+        });
     }
 }
 
 ipcMain.on('createProject', async (event: any, project: CFAProjectOptions) => {
+    showNotification({
+        body: 'Starting Create Project',
+    });
     try {
         await createProject(project);
     } catch (err) {
         console.log(err);
     }
 });
+
+const showNotification = (options: Electron.NotificationConstructorOptions) => {
+    new Notification(options).show();
+};
