@@ -6,6 +6,7 @@ ipcMain.on('createBoilerplate', async (event, project: ProjectObject) => {
     try {
         await createResource(project);
     } catch (err) {
-        console.log(err);
+        // FIXME: Create a notification
+        console.log(`Something went wrong. Error: ${err.message}`);
     }
 });

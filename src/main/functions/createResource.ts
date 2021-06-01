@@ -41,7 +41,8 @@ export async function createResource(project: ProjectObject) {
         showNotification(project.resourceName);
         console.log(`Created folder ${type}`);
     } catch (error) {
-        console.log(error);
+        // FIXME: Create a notification
+        console.log(`Something went wrong. Error: ${error.message}`);
     }
 }
 
