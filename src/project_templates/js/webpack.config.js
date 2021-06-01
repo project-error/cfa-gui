@@ -13,7 +13,7 @@ const client = {
     },
     output: {
         path: path.resolve(buildPath, 'client'),
-        filename: '[contenthash].client.js',
+        filename: 'client.js',
     },
 };
 
@@ -27,7 +27,7 @@ const server = {
     },
     output: {
         path: path.resolve(buildPath, 'server'),
-        filename: '[contenthash].server.js',
+        filename: 'server.js',
     },
 };
 
