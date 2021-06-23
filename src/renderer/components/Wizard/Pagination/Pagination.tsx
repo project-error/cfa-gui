@@ -37,17 +37,16 @@ export default function Pagination() {
                 return setError('Please provide a file path.');
             if (resourceName == '')
                 return setError('Please provide a resource name.');
-            if (resourceAuthor == '')
-                return setError('Please provide a author name.');
-            if (resourceDescription == '')
-                return setError('Please provide a description.');
-            if (resourceVersion == '')
-                return setError('Please provide a resource version.');
         }
 
         if (steps === 2) {
             if (resourceTemplate == '')
                 return setError('Please select a resource template');
+
+            if (resourceTemplate === 'Lua') {
+                setError(null);
+                return setSteps(4);
+            }
         }
 
         setSteps(steps + 1);
@@ -55,6 +54,10 @@ export default function Pagination() {
     };
 
     const handleBack = () => {
+        if (resourceTemplate === 'Lua' && steps === 4) {
+            return setSteps(2);
+        }
+
         setSteps(steps - 1);
         console.log(steps);
     };
