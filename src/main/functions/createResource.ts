@@ -1,5 +1,6 @@
 import * as cp from 'child_process';
 import fs from 'fs-extra';
+import path from 'path';
 import { createFxmaniest } from '../stubs/fxmanifestTemplate';
 import { ProjectObject } from '../types/project';
 import { Notification } from 'electron';
@@ -38,18 +39,35 @@ export async function createResource(project: ProjectObject) {
             }
         }
 
-        showNotification(project.resourceName);
+        showSuccessNotification(project.resourceName, resourcePath);
         console.log(`Created folder ${type}`);
     } catch (error) {
         // FIXME: Create a notification
         console.log(`Something went wrong. Error: ${error.message}`);
+        showErrorNotification(project.resourceName);
     }
 }
 
-const showNotification = (resourceName: string) => {
-    const notification: Electron.NotificationConstructorOptions = {
+const showSuccessNotification = (
+    resourceName: string,
+    resourcePath: string,
+) => {
+    const notification = new Notification({
         title: 'Create FiveM App',
         body: `Successfully created ${resourceName} resource.`,
+    });
+
+    notification.show();
+
+    notification.on('click', () => {
+        cp.exec(`start "" "${resourcePath}"`);
+    });
+};
+
+const showErrorNotification = (resourceName: string) => {
+    const notification: Electron.NotificationConstructorOptions = {
+        title: 'Create FiveM App',
+        body: `Failed to create resource: ${resourceName}`,
     };
 
     new Notification(notification).show();
